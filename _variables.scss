@@ -1,0 +1,86 @@
+@use "sass:math";
+// Theme breakpoints! To make/modify a breakpoint, do it here
+// it's useful to have a "blank" one for the purpuses of looping
+// and the remaining breakpoints are named thusly ...
+// mob: mobile, tab: tablet, scr: screen, lg: large screen
+// so the way the media queires are generated, "mob" is 0-640px, "tab" 640-720, "scr" 768-1024, "lg" is anything bigger
+$breakpoints: (
+  "_": none,
+  "mob": 0,
+  "tab": 640px,
+  "scr": 768px,
+  "lg": 1024px
+);
+
+// theme colors
+$primary: #2953f5;
+$secondary: #023c40;
+$error: #cc2936;
+$info: #f69622;
+$text: #231c07;
+
+// color pallate map for text, background color, borders
+$colors: (
+  "pri": $primary,
+  "sec": $secondary,
+  "err": $error,
+  "info": $info,
+  "txt": $text,
+  "blue": #0ad3ff,
+  "red": #e30d1f,
+  "yellow": #e5e059,
+  "green": #17a398,
+  "orange": #f58a07,
+  "purple": #3d2645,
+  "gray": #798071,
+  "black": #0e131f,
+  "white": #fffffa
+);
+
+// margins, padding, font-size classes are multiples of this
+$base-size: 0.125rem;
+
+// for margins, paddings, font-size etc
+// p-1 is 1 times the base spacing, m-12 is 12 times the base spacing, etc
+// following the pattern, the spacing vals can be modified here
+$size-multipliers: (
+  "0": 0,
+  "xxs": 1,
+  "xs": 2,
+  "s": 4,
+  "m": 6,
+  "std": 8,
+  "lg": 10,
+  "xl": 12,
+  "2xl": 16,
+  "3xl": 24,
+  "4xl": 32,
+  "5xl": 40
+);
+
+// for border radius
+$base-border-radius: 0.5rem;
+$border-radius-map: (
+  "default": $base-border-radius,
+  "none": 0,
+  "xs": math.div($base-border-radius, 4),
+  "sm": math.div($base-border-radius, 2),
+  "lg": $base-border-radius * 2,
+  "xl": $base-border-radius * 3,
+  "full": 50%
+);
+
+// box shadows
+// test out when back
+// goal.. get the grid system up
+// and color system up.. and get site up
+// goal for weekend
+$box-shadow-map: (
+  "shadow-none": 0,
+  "shadow-xs": 1,
+  "shadow-sm": 1,
+  "shadow-md": 1,
+  "shadow-lg": 1,
+  "shadow-xl": 1,
+  "shadow-2xl": 1
+);

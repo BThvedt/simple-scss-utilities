@@ -1,0 +1,197 @@
+@use "sass:math";
+
+/*
+  Each utility in the utility map below has a prefix and a values map
+  the values maps look like this (with base-size = 0.125rem) 
+
+  (
+    "0": 0rem
+    "xxs": 0.125rem
+    "xs": 0.25rem
+    ... etc 
+  )
+
+  for all the values defined in the $spacing-vals map found in variables
+
+  Then from these, classes are generated with the prefix
+  so ultimately, for padding, for example, 
+  we'll end up with:
+
+  p-xs { 
+    padding: 0.25rem
+  }
+  .p-s {
+    padding: 0.5rem
+  }
+  ..etc
+
+  Also for note for responsiveness those classes are 
+  genereated too for the breakpoints like so:
+
+  sm:p-xs {
+    padding: 0.25rem
+  }
+
+  lg:p-s {
+    padding: 0.5rem
+  }
+  ..etc
+
+  Since the breakpoings are lower in ssu.css then the defaults, they will take 
+  precidence
+
+  As you can imagine, there's a lot of classes. Important
+  to make sure purging is set up!  See online docs
+*/
+
+// Let's get started
+// a helper function to fill out the spacings map found in variables file
+// just builds a new map with the vals actuall css vals in rem
+@function map-size-vals() {
+  $return-map: ();
+
+  @each $key, $val in $size-multipliers {
+    $return-map: map-merge(
+      $return-map,
+      (
+        $key: $base-size * $val
+      )
+    );
+  }
+
+  @return $return-map;
+}
+
+// A map of all the utility values I want
+// some of the arrays of values are mapped with the
+// previous function
+$utilities: (
+  "padding": (
+    "prefix": "p",
+    "values": map-size-vals()
+  ),
+  "padding-left": (
+    "prefix": "p1",
+    "values": map-size-vals()
+  ),
+  "padding-right": (
+    "prefix": "pr",
+    "values": map-size-vals()
+  ),
+  "padding-top": (
+    "prefix": "pt",
+    "values": map-size-vals()
+  ),
+  "padding-bottom": (
+    "prefix": "pb",
+    "values": map-size-vals()
+  ),
+  "mergin": (
+    "prefix": "m",
+    "values": map-size-vals()
+  ),
+  "mergin-left": (
+    "prefix": "ml",
+    "values": map-size-vals()
+  ),
+  "mergin-right": (
+    "prefix": "mr",
+    "values": map-size-vals()
+  ),
+  "mergin-top": (
+    "prefix": "mt",
+    "values": map-size-vals()
+  ),
+  "mergin-bottom": (
+    "prefix": "mb",
+    "values": map-size-vals()
+  ),
+  "font-size": (
+    "prefix": "font",
+    "values": map-size-vals()
+  ),
+  "opacity": (
+    "prefix": "o",
+    "values": (
+      "10": 0.1,
+      "20": 0.2,
+      "30": 0.3,
+      "40": 0.4,
+      "50": 0.5,
+      "60": 0.6,
+      "70": 0.7,
+      "80": 0.8,
+      "90": 0.9,
+      "100": 1
+    )
+  ),
+  "display": (
+    "prefix": "display",
+    "values": (
+      "n": none,
+      "b": block,
+      "f": flex,
+      "i": inline,
+      "i-b": inline-block
+    )
+  ),
+  "border-radius": (
+    "prefix": "br",
+    "values": $border-radius-map
+  )
+);
+
+// Onto actually generating the utility classes..
+
+// a function for getting the final utility class string
+// looks like: p-4 or lg:ml-2 ., y'know, the utiltiy classes!
+// see associated docs for full list
+@function get-class-string($breakpointKey, $valueKey, $prefix) {
+  $class-string: "";
+
+  @if ($breakpointKey == "_") {
+    @if ($valueKey == "default") {
+      $class-string: #{$prefix};
+    } @else {
+      $class-string: #{$prefix} + "-" + #{$valueKey};
+    }
+  } @else {
+    @if ($valueKey == "default") {
+      $class-string: #{$breakpointKey} + "\\:"+ #{$prefix};
+    } @else {
+      $class-string: #{$breakpointKey} + "\\:"+ #{$prefix} + "-" + #{$valueKey};
+    }
+  }
+
+  @return $class-string;
+}
+
+// a mixin that essentially generates a ton of classes
+@mixin generate-classes($breakpointKey) {
+  @each $property, $map in $utilities {
+    $prefix: map-get($map, "prefix");
+    $values: map-get($map, "values");
+
+    @each $valueKey, $val in $values {
+      $class-string: get-class-string($breakpointKey, $valueKey, $prefix);
+
+      .#{$class-string} {
+        #{$property}: $val;
+      }
+    }
+  }
+}
+
+// finally, the magic happens here!
+// warning: this is A LOT of css lol
+// since the non-breakpoint classes are generated first,
+// the breakpoint classes should overide when the breakpoitns are toggeled
+@each $breakpointKey, $breakpointVal in $breakpoints {
+  @if ($breakpointKey == "_") {
+    @include generate-classes($breakpointKey);
+  } @else {
+    @include mediaQuery($breakpointKey) {
+      @include generate-classes($breakpointKey);
+    }
+  }
+}
