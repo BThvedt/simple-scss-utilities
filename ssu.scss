@@ -2,12 +2,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Francois+One&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
 
 // base & layout?
+@import "variables";
 @import "base";
 @import "breakpoints";
-@import "variables";
 
 // utilities (margin, padding, opacity, etc)
 @import "utilities";
+@import "grid";
+@import "_colors_and_element_states";
 
 /* 
 	font-family: 'Bebas Neue', sans-serif;
@@ -18,56 +20,3 @@
 
 // CSS reset, some rules copied from tailwind's prefilght philosophy
 // others, just how I like 'em
-* {
-  color: inherit;
-  margin: 0;
-}
-
-body {
-  font-family: "Lato", sans-serif; // update variables
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-size: inherit;
-  font-weight: inherit;
-}
-
-ol,
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-a {
-  text-decoration: none;
-}
-
-img,
-svg,
-video,
-canvas,
-audio,
-iframe,
-embed,
-object {
-  display: block;
-}
-
-img,
-video {
-  max-width: 100%;
-  height: auto;
-}
-
-*,
-::before,
-::after {
-  border-width: 0;
-  border-style: solid;
-  // border-color: theme('borderColor.DEFAULT', currentColor); <- work on this once I have variables ..
-}

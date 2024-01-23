@@ -1,0 +1,299 @@
+/*
+  This is kinda tricky, first I want classes for theme colors.. that part's easy enough
+  text-color, bg-color, border color. Simple. Then I want day and night modes, that's also 
+  not tough, just have colors that override that if their parent has a night class.
+
+  Then I want classes for hover states. Ok this is starting to get complicated. But not really..
+  say your only theme color is red. And you have a different "red" for day or night. And say the
+  only state is hover and the only class is for text and it just goes lighter or darker. 
+  The scss will look like this: 
+
+  .text-red {
+    color: ...;
+  }
+  .text-red-lighter {
+    color: .. (lighter)
+  }
+  .text-red-darker {
+    ...
+  }
+  .hover:text-red {
+  }
+  .hover:text-red-lighter {
+  }
+  .hover:text-red-darker {
+  }
+  .. 
+
+  .night {
+    .text-red .. (different color) 
+    .text-red-lighter .. 
+    .hover:text-red-lighter ..  
+    etc .. 
+  }
+
+  since I have the element states in this file, it seems like a logical place to also 
+  handle elements states for font weight and text decoration too .. although these
+  things 
+*/
+
+// soooo... how to do this ..
+// start with colors for day and night
+// these are some of the ugliest loops I've written
+// compounded by confusing variable names, along with scss's limited map functions..
+// I just wanna get it working and never see these again haha
+$color-map: ();
+$class-color-map: ();
+$final-map: ();
+$class-prefix-text: "txt"; // for text color
+$class-prefix-background: "bg"; // background
+$class-prefix-border: "b"; // border color
+$class-prefixes: $class-prefix-text, $class-prefix-background,
+  $class-prefix-border;
+$element-states: "hover", "active", "visited", "target", "focus", "focus_within",
+  "focus_visible";
+
+@each $mode in $modes {
+  $mode-color-map: map-get($colors, $mode);
+  $final-mode-color-map: ();
+
+  // first, let's attach the modifiers to each color
+  // these are some ugly loops.. lol
+  // I prefer mix with black or white vs lighten or darkent
+
+  @if ($mode-color-map != null) {
+    @each $color, $val in $mode-color-map {
+      // first merge the color into mode colro map
+      $final-mode-color-map: map-merge(
+        $final-mode-color-map,
+        (
+          $color: $val
+        )
+      );
+
+      // then add the light, lighter, dark, darker values
+      @each $modifier-map-key, $modifier-map in $color-modifiers {
+        @if ($modifier-map-key == "light") {
+          @each $modifierKey, $modifierVal in $modifier-map {
+            $new-color-key: #{$color} + "-" + #{$modifierKey};
+            $new-color-val: mix(white, $val, $modifierVal);
+            $final-mode-color-map: map-merge(
+              $final-mode-color-map,
+              (
+                $new-color-key: $new-color-val
+              )
+            );
+          }
+        } @else {
+          @each $modifierKey, $modifierVal in $modifier-map {
+            $new-color-key: #{$color} + "-" + #{$modifierKey};
+            $new-color-val: mix(black, $val, $modifierVal);
+            $final-mode-color-map: map-merge(
+              $final-mode-color-map,
+              (
+                $new-color-key: $new-color-val
+              )
+            );
+          }
+        }
+      }
+    }
+
+    $color-map: map-merge(
+      $color-map,
+      (
+        $mode: $final-mode-color-map
+      )
+    );
+  }
+}
+
+// now generate the text-{colorname}, bg-{colorname}, border-{colorname} classes
+@each $mode in $modes {
+  $mode-color-map: map-get($color-map, $mode);
+  $partial-class-color-map: ();
+
+  @if ($mode-color-map != null) {
+    @each $class-prefix in $class-prefixes {
+      $class-category-map: ();
+
+      @each $color, $val in $mode-color-map {
+        // @each $class-prefix in $class-prefixes {
+        $class-name: #{$class-prefix} + "-" + $color;
+
+        $class-category-map: map-merge(
+          $class-category-map,
+          (
+            $class-name: $val
+          )
+        );
+      }
+
+      $partial-class-color-map: map-merge(
+        $partial-class-color-map,
+        (
+          $class-prefix: $class-category-map
+        )
+      );
+    }
+
+    $class-color-map: map-merge(
+      $class-color-map,
+      (
+        $mode: $partial-class-color-map
+      )
+    );
+  }
+}
+
+// @debug $class-color-map;
+
+// now finally, all the element states
+@each $mode in $modes {
+  $mode-map: map-get($class-color-map, $mode);
+  $final-map: ();
+
+  @if ($mode-map != null) {
+    // "night mode"
+    $final-mode-map: ();
+    @each $class-prefix in $class-prefixes {
+      // "color mode - element map"
+      $element-map: map-get($mode-map, $class-prefix);
+      $final-element-map: ();
+
+      @each $class-name, $val in $element-map {
+        // looks like txt-info-lt: $f8abfe
+
+        // first put it into final element  map
+        $final-element-map: map-merge(
+          $final-element-map,
+          (
+            $class-name: $val
+          )
+        );
+
+        // then do it again for each element state
+        @each $element-state in $element-states {
+          $state-class-name: #{$element-state} + "\\:"+ #{$class-name};
+          $final-element-map: map-merge(
+            $final-element-map,
+            (
+              $state-class-name: $val
+            )
+          );
+        }
+      }
+
+      $final-mode-map: map-merge(
+        $final-mode-map,
+        (
+          $class-prefix: $final-element-map
+        )
+      );
+    }
+
+    $final-map: map-merge(
+      $final-map,
+      (
+        $mode: $final-mode-map
+      )
+    );
+  }
+}
+
+// @debug $final-map;
+// phew! NOW .. all we gotta do, is just make the classes..
+// I think it's working.. I hope to the lord it is ..
+// .. let's make the classes lol
+
+@each $mode, $mode-map in $final-map {
+  @if ($mode== "default") {
+    @each $category, $category-map in $mode-map {
+      @each $class-name, $val in $category-map {
+        // there's a better way to have done this, but at this point
+        // I'm not gonna go back and write the above loops again
+        @if ($category == $class-prefix-text) {
+          .#{$class-name} {
+            color: $val;
+          }
+        }
+        @if ($category == $class-prefix-background) {
+          .#{$class-name} {
+            background-color: $val;
+          }
+        }
+        @if ($category == $class-prefix-border) {
+          .#{$class-name} {
+            border-color: $val;
+          }
+        }
+      }
+    }
+  } @else {
+    @each $category, $category-map in $mode-map {
+      @each $class-name, $val in $category-map {
+        .#{$mode} {
+          @if ($category == $class-prefix-text) {
+            .#{$class-name} {
+              color: $val;
+            }
+          }
+          @if ($category == $class-prefix-background) {
+            .#{$class-name} {
+              background-color: $val;
+            }
+          }
+          @if ($category == $class-prefix-border) {
+            .#{$class-name} {
+              border-color: $val;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// allllright! We have color classes! Now just to make classes for the font sizes, weight, and text-decorations
+// because who knows, someone might want to change those on element states too
+// this is the same as the utilities map
+$text-map: (
+  "font-size": (
+    "prefix": "font",
+    "values": map-size-vals()
+  ),
+  "font-family": (
+    "prefix": "font",
+    "values": $fonts
+  ),
+  "font-weight": (
+    "prefix": "font",
+    "values": $font-weights
+  ),
+  "text-decoration": (
+    "prefix": "text",
+    "values": (
+      "underline": underline,
+      "overline": overline,
+      "line-through": line-through
+    )
+  )
+);
+
+@each $property, $map in $text-map {
+  $prefix: map-get($map, "prefix");
+  $values: map-get($map, "values");
+
+  @each $state in $element-states {
+    // make state like hover:font-size-xl and focus:text-decoration-underline and stuff like that
+    @each $valueKey, $val in $values {
+      $class-string: #{$state} + "\\:"+ #{$prefix} + "-" + #{$valueKey};
+
+      .#{$class-string} {
+        #{$property}: $val;
+      }
+    }
+  }
+}
+
+// ok .. only a few things left.. and the css file, unpurged, is still only about 100k ..

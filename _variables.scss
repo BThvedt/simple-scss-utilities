@@ -1,4 +1,27 @@
 @use "sass:math";
+
+// Start with fonts
+$fonts: (
+  "default": (
+    "Lato",
+    sans-serif
+  ),
+  "large": (
+    "Francois One",
+    sans-serif
+  ),
+  "header": (
+    "Bebas Neue",
+    sans-serif
+  )
+);
+
+$font-weights: (
+  "light": 200,
+  "normal": 400,
+  "bold": 700
+);
+
 // Theme breakpoints! To make/modify a breakpoint, do it here
 // it's useful to have a "blank" one for the purpuses of looping
 // and the remaining breakpoints are named thusly ...
@@ -12,29 +35,70 @@ $breakpoints: (
   "lg": 1024px
 );
 
+// night mode ..
+$modes: "default", "night";
+
+// lighter and darker
+// for example, the numbers are how much percent lighter or darker the color is
+// I actually mix with that percentage of black and white, because I
+// think it looks a little better
+$color-modifiers: (
+  "light": (
+    "lt": 20%,
+    "ltr": 40%
+  ),
+  "dark": (
+    "dk": 20%,
+    "dkr": 40%
+  )
+);
+
 // theme colors
 $primary: #2953f5;
 $secondary: #023c40;
 $error: #cc2936;
 $info: #f69622;
 $text: #231c07;
+$background: #fffffa;
+
+$primary-night: #2953f5;
+$secondary-night: #023c40;
+$error-night: #cc2936;
+$info-night: #f69622;
+$text-night: #231c07;
+$background-night: #fffffa;
 
 // color pallate map for text, background color, borders
+// each color gets a 'light' and 'lighter', 'dark' amd "darker' modifier
+// also, each color can optionally be overridden in a differnet mode,
+// the key of the sub-map has to be the same as the mode
+// and the color name has to be defined
 $colors: (
-  "pri": $primary,
-  "sec": $secondary,
-  "err": $error,
-  "info": $info,
-  "txt": $text,
-  "blue": #0ad3ff,
-  "red": #e30d1f,
-  "yellow": #e5e059,
-  "green": #17a398,
-  "orange": #f58a07,
-  "purple": #3d2645,
-  "gray": #798071,
-  "black": #0e131f,
-  "white": #fffffa
+  "default": (
+    "pri": $primary,
+    "sec": $secondary,
+    "err": $error,
+    "info": $info,
+    "def": $text,
+    "bg": $background,
+    "blu": #0ad3ff,
+    "rd": #e30d1f,
+    "ylw": #e5e059,
+    "grn": #17a398,
+    "or": #f58a07,
+    "purp": #3d2645,
+    "gry": #798071,
+    "blk": #0e131f,
+    "wte": #fffffa
+  ),
+  "night": (
+    "pri": $primary,
+    "sec": $secondary,
+    "err": $error,
+    "info": $info,
+    "def": $text,
+    "bg": $background
+  )
 );
 
 // margins, padding, font-size classes are multiples of this
@@ -60,11 +124,12 @@ $size-multipliers: (
 
 // for border radius
 $base-border-radius: 0.5rem;
-$border-radius-map: (
+$border-radiuses: (
   "default": $base-border-radius,
   "none": 0,
   "xs": math.div($base-border-radius, 4),
   "sm": math.div($base-border-radius, 2),
+  "md": $base-border-radius,
   "lg": $base-border-radius * 2,
   "xl": $base-border-radius * 3,
   "full": 50%
@@ -75,12 +140,42 @@ $border-radius-map: (
 // goal.. get the grid system up
 // and color system up.. and get site up
 // goal for weekend
-$box-shadow-map: (
-  "shadow-none": 0,
-  "shadow-xs": 1,
-  "shadow-sm": 1,
-  "shadow-md": 1,
-  "shadow-lg": 1,
-  "shadow-xl": 1,
-  "shadow-2xl": 1
+$box-shadows: (
+  "none": 0,
+  "xs": (
+    0px 1px 3px rgba(0, 0, 0, 0.15),
+    0px -1px 1px rgba(0, 0, 0, 0.1)
+  ),
+  "sm": (
+    0px 2px 3px 1px rgba(0, 0, 0, 0.1),
+    0px -1px 2px rgba(0, 0, 0, 0.07)
+  ),
+  "md": (
+    0px 3px 5px 1px rgba(0, 0, 0, 0.1),
+    0px -1px 4px 1px rgba(0, 0, 0, 0.07)
+  ),
+  "lg": (
+    0px 3px 7px 1px rgba(0, 0, 0, 0.15),
+    0px -2px 4px 1px rgba(0, 0, 0, 0.1)
+  ),
+
+  "xl": (
+    0px 4px 8px 2px rgba(0, 0, 0, 0.15),
+    0px -2px 5px 1px rgba(0, 0, 0, 0.1)
+  ),
+  "2xl": (
+    0px 5px 10px 2px rgba(0, 0, 0, 0.15),
+    0px -3px 7px 2px rgba(0, 0, 0, 0.1)
+  )
+);
+
+$grid-columns: 12;
+$grid-gaps: (
+  "none": 0,
+  "xs": $base-size * 2,
+  "sm": $base-size * 4,
+  "md": $base-size * 8,
+  "lg": $base-size * 12,
+  "xl": $base-size * 16,
+  "2x1": $base-size * 24
 );

@@ -86,28 +86,24 @@ $utilities: (
     "prefix": "pb",
     "values": map-size-vals()
   ),
-  "mergin": (
+  "margin": (
     "prefix": "m",
     "values": map-size-vals()
   ),
-  "mergin-left": (
+  "margin-left": (
     "prefix": "ml",
     "values": map-size-vals()
   ),
-  "mergin-right": (
+  "margin-right": (
     "prefix": "mr",
     "values": map-size-vals()
   ),
-  "mergin-top": (
+  "margin-top": (
     "prefix": "mt",
     "values": map-size-vals()
   ),
-  "mergin-bottom": (
+  "margin-bottom": (
     "prefix": "mb",
-    "values": map-size-vals()
-  ),
-  "font-size": (
-    "prefix": "font",
     "values": map-size-vals()
   ),
   "opacity": (
@@ -126,18 +122,88 @@ $utilities: (
     )
   ),
   "display": (
-    "prefix": "display",
+    "prefix": "d",
     "values": (
-      "n": none,
-      "b": block,
-      "f": flex,
-      "i": inline,
-      "i-b": inline-block
+      "none": none,
+      "block": block,
+      "flex": flex,
+      "inline": inline,
+      "i-block": inline-block
+    )
+  ),
+  "flex-direction": (
+    "prefix": "flex",
+    "values": (
+      "row": row,
+      "row-reverse": row-reverse,
+      "col": column,
+      "col-reverse": column-reverse
+    )
+  ),
+  "flex-wrap": (
+    "prefix": "flex",
+    "values": (
+      "wrap": wrap,
+      "nowrap": nowrap,
+      "wrap-reverse": wrap-reverse
+    )
+  ),
+  "justify-content": (
+    "prefix": "justify",
+    "values": (
+      "start": flex-start,
+      "end": flex-end,
+      "around": space-around,
+      "between": space-between
+    )
+  ),
+  "align-items": (
+    "prefix": "items",
+    "values": (
+      "center": center,
+      "start": flex-start,
+      "end": flex-end,
+      "stretch": stretch,
+      "baseline": baseline
+    )
+  ),
+  "align-content": (
+    "prefix": "content",
+    "values": (
+      "between": space-between,
+      "around": space-around,
+      "stretch": stretch,
+      "start": flex-start,
+      "end": flex-end
     )
   ),
   "border-radius": (
     "prefix": "br",
-    "values": $border-radius-map
+    "values": $border-radiuses
+  ),
+  "box-shadow": (
+    "prefix": "shadow",
+    "values": $box-shadows
+  ),
+  "font-size": (
+    "prefix": "font",
+    "values": map-size-vals()
+  ),
+  "font-family": (
+    "prefix": "font",
+    "values": $fonts
+  ),
+  "font-weight": (
+    "prefix": "font",
+    "values": $font-weights
+  ),
+  "text-decoration": (
+    "prefix": "text",
+    "values": (
+      "underline": underline,
+      "overline": overline,
+      "line-through": line-through
+    )
   )
 );
 
