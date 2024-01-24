@@ -265,27 +265,27 @@ $utilities: (
     )
   ),
   "left": (
-    "prefix": "position",
+    "prefix": "left",
     "values": map-merge(map-size-vals(), $fraction-map)
   ),
   "top": (
-    "prefix": "position",
+    "prefix": "top",
     "values": map-merge(map-size-vals(), $fraction-map)
   ),
   "right": (
-    "prefix": "position",
+    "prefix": "right",
     "values": map-merge(map-size-vals(), $fraction-map)
   ),
   "bottom": (
-    "prefix": "position",
+    "prefix": "bottom",
     "values": map-merge(map-size-vals(), $fraction-map)
   ),
   "width": (
-    "prefix": "position",
+    "prefix": "w",
     "values": map-merge(map-size-vals(), $fraction-map)
   ),
   "height": (
-    "prefix": "position",
+    "prefix": "posihtion",
     "values": map-merge(map-size-vals(), $fraction-map)
   )
 );
