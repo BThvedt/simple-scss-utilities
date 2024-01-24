@@ -101,7 +101,13 @@ $utilities: (
   ),
   "margin": (
     "prefix": "m",
-    "values": map-size-vals()
+    "values":
+      map-merge(
+        map-size-vals(),
+        (
+          "auto": auto
+        )
+      )
   ),
   "margin-left": (
     "prefix": "ml",
