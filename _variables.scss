@@ -1,6 +1,11 @@
 @use "sass:math";
 
-// Start with fonts
+// a variable for the max comtainer size
+// max-width gets this max-width-container
+// if you don't want to use it, you don't gotta (or set it to 100% or 100 vw)
+$container-size: 1024px; // 1024 is a good value imo
+
+// fonts are a nice start to customizing a design
 $fonts: (
   "default": (
     "Lato",

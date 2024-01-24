@@ -62,6 +62,19 @@
   @return $return-map;
 }
 
+@function height-and-width-vals() {
+  $return-map: map-merge(map-size-vals(), $fraction-map);
+
+  $return-map: map-merge(
+    $return-map,
+    (
+      "container": $container-size
+    )
+  );
+
+  @return $return-map;
+}
+
 // A map of all the utility values I want
 // some of the arrays of values are mapped with the
 // previous function
@@ -266,27 +279,43 @@ $utilities: (
   ),
   "left": (
     "prefix": "left",
-    "values": map-merge(map-size-vals(), $fraction-map)
+    "values": height-and-width-vals()
   ),
   "top": (
     "prefix": "top",
-    "values": map-merge(map-size-vals(), $fraction-map)
+    "values": height-and-width-vals()
   ),
   "right": (
     "prefix": "right",
-    "values": map-merge(map-size-vals(), $fraction-map)
+    "values": height-and-width-vals()
   ),
   "bottom": (
     "prefix": "bottom",
-    "values": map-merge(map-size-vals(), $fraction-map)
+    "values": height-and-width-vals()
   ),
   "width": (
     "prefix": "w",
-    "values": map-merge(map-size-vals(), $fraction-map)
+    "values": height-and-width-vals()
   ),
   "height": (
-    "prefix": "posihtion",
-    "values": map-merge(map-size-vals(), $fraction-map)
+    "prefix": "h",
+    "values": height-and-width-vals()
+  ),
+  "min-width": (
+    "prefix": "w",
+    "values": height-and-width-vals()
+  ),
+  "max-width": (
+    "prefix": "w",
+    "values": height-and-width-vals()
+  ),
+  "min-height": (
+    "prefix": "w",
+    "values": height-and-width-vals()
+  ),
+  "max-height": (
+    "prefix": "w",
+    "values": height-and-width-vals()
   )
 );
 
