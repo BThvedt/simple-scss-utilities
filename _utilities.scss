@@ -302,19 +302,19 @@ $utilities: (
     "values": height-and-width-vals()
   ),
   "min-width": (
-    "prefix": "w",
+    "prefix": "min-w",
     "values": height-and-width-vals()
   ),
   "max-width": (
-    "prefix": "w",
+    "prefix": "max-w",
     "values": height-and-width-vals()
   ),
   "min-height": (
-    "prefix": "w",
+    "prefix": "min-h",
     "values": height-and-width-vals()
   ),
   "max-height": (
-    "prefix": "w",
+    "prefix": "max-h",
     "values": height-and-width-vals()
   )
 );
