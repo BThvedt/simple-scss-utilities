@@ -106,20 +106,38 @@ $utilities: (
     "prefix": "mb",
     "values": map-size-vals()
   ),
-  "opacity": (
-    "prefix": "o",
-    "values": (
-      "10": 0.1,
-      "20": 0.2,
-      "30": 0.3,
-      "40": 0.4,
-      "50": 0.5,
-      "60": 0.6,
-      "70": 0.7,
-      "80": 0.8,
-      "90": 0.9,
-      "100": 1
-    )
+  "border-radius": (
+    "prefix": "radius",
+    "values": $border-radiuses
+  ),
+  "border-width": (
+    "prefix": "border",
+    "values": $border-and-outline-widths
+  ),
+  "border-top-width": (
+    "prefix": "bt",
+    "values": $border-and-outline-widths
+  ),
+  "border-left-width": (
+    "prefix": "bl",
+    "values": $border-and-outline-widths
+  ),
+  "border-right-width": (
+    "prefix": "br",
+    "values": $border-and-outline-widths
+  ),
+  "border-bottom-width": (
+    "prefix": "bb",
+    "values": $border-and-outline-widths
+  ),
+
+  "outline-width": (
+    "prefix": "outline",
+    "values": $border-and-outline-widths
+  ),
+  "outline-offset": (
+    "prefix": "outline-offset",
+    "values": $border-and-outline-widths
   ),
   "display": (
     "prefix": "d",
@@ -129,6 +147,46 @@ $utilities: (
       "flex": flex,
       "inline": inline,
       "i-block": inline-block
+    )
+  ),
+  "float": (
+    "prefix": "float",
+    "values": (
+      "start": inline-start,
+      "end": inline-end,
+      "right": right,
+      "left": left,
+      "none": none
+    )
+  ),
+  "overflow": (
+    "prefix": "overflow",
+    "values": (
+      "auto": auto,
+      "hidden": hidden,
+      "clip": clip,
+      "visible": visible,
+      "scroll": scroll
+    )
+  ),
+  "overflow-x": (
+    "prefix": "overflow-x",
+    "values": (
+      "auto": auto,
+      "hidden": hidden,
+      "clip": clip,
+      "visible": visible,
+      "scroll": scroll
+    )
+  ),
+  "overflow-y": (
+    "prefix": "overflow-y",
+    "values": (
+      "auto": auto,
+      "hidden": hidden,
+      "clip": clip,
+      "visible": visible,
+      "scroll": scroll
     )
   ),
   "flex-direction": (
@@ -177,10 +235,6 @@ $utilities: (
       "end": flex-end
     )
   ),
-  "border-radius": (
-    "prefix": "br",
-    "values": $border-radiuses
-  ),
   "box-shadow": (
     "prefix": "shadow",
     "values": $box-shadows
@@ -189,21 +243,50 @@ $utilities: (
     "prefix": "font",
     "values": map-size-vals()
   ),
-  "font-family": (
-    "prefix": "font",
-    "values": $fonts
-  ),
-  "font-weight": (
-    "prefix": "font",
-    "values": $font-weights
-  ),
-  "text-decoration": (
-    "prefix": "text",
+  "box-sizing": (
+    "prefix": "box-sizing",
     "values": (
-      "underline": underline,
-      "overline": overline,
-      "line-through": line-through
+      "content": content-box,
+      "border": border-box,
+      "initial": initial,
+      "inherit": inherit
     )
+  ),
+  "position": (
+    "prefix": "position",
+    "values": (
+      "relative": relative,
+      "absolute": absolute,
+      "fixed": fixed,
+      "static": static,
+      "sticky": sticky,
+      "inherit": inherit,
+      "initial": initial
+    )
+  ),
+  "left": (
+    "prefix": "position",
+    "values": map-merge(map-size-vals(), $fraction-map)
+  ),
+  "top": (
+    "prefix": "position",
+    "values": map-merge(map-size-vals(), $fraction-map)
+  ),
+  "right": (
+    "prefix": "position",
+    "values": map-merge(map-size-vals(), $fraction-map)
+  ),
+  "bottom": (
+    "prefix": "position",
+    "values": map-merge(map-size-vals(), $fraction-map)
+  ),
+  "width": (
+    "prefix": "position",
+    "values": map-merge(map-size-vals(), $fraction-map)
+  ),
+  "height": (
+    "prefix": "position",
+    "values": map-merge(map-size-vals(), $fraction-map)
   )
 );
 

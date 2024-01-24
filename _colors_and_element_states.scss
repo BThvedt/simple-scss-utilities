@@ -45,11 +45,19 @@
 $color-map: ();
 $class-color-map: ();
 $final-map: ();
-$class-prefix-text: "txt"; // for text color
-$class-prefix-background: "bg"; // background
-$class-prefix-border: "b"; // border color
+$class-prefix-text: "text"; // for text color
+$class-prefix-background: "background"; // background
+$class-prefix-border: "border"; // border color
+$class-prefix-outline: "outline"; // ..etc
+$class-prefix-text-decoration: "text-decoration-color";
+// these need to be handled different
+$class-prefix-selection-color: "selection-color";
+$class-prefix-selection-background: "selection-bg";
+
+// ok... some helper arrays
 $class-prefixes: $class-prefix-text, $class-prefix-background,
-  $class-prefix-border;
+  $class-prefix-border, $class-prefix-outline, $class-prefix-text-decoration,
+  $class-prefix-selection-color, $class-prefix-selection-background;
 $element-states: "hover", "active", "visited", "target", "focus", "focus_within",
   "focus_visible";
 
@@ -109,6 +117,7 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
 }
 
 // now generate the text-{colorname}, bg-{colorname}, border-{colorname} classes
+// alsoe the selection-{colorname}, although that one looks a bit different
 @each $mode in $modes {
   $mode-color-map: map-get($color-map, $mode);
   $partial-class-color-map: ();
@@ -174,6 +183,8 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
 
         // then do it again for each element state
         @each $element-state in $element-states {
+          // wait.. I think I did this wrong lol
+          // I like the class name .. but .. the psudeo state I think is wrong
           $state-class-name: #{$element-state} + "\\:"+ #{$class-name};
           $final-element-map: map-merge(
             $final-element-map,
@@ -227,6 +238,27 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
             border-color: $val;
           }
         }
+        @if ($category == $class-prefix-outline) {
+          .#{$class-name} {
+            outline-color: $val;
+          }
+        }
+        @if ($category == $class-prefix-text-decoratione) {
+          .#{$class-name} {
+            text-decoration-color: $val;
+          }
+        }
+        @if ($category == $class-prefix-selection-color) {
+          .#{$class-name}::selection {
+            color: $val;
+          }
+        }
+        @if ($category == $class-prefix-selection-background) {
+          .#{$class-name}::selection {
+            background: $val;
+          }
+        }
+        // $class-prefix-text-decoration
       }
     }
   } @else {
@@ -248,16 +280,38 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
               border-color: $val;
             }
           }
+          @if ($category == $class-prefix-outline) {
+            .#{$class-name} {
+              outline-color: $val;
+            }
+          }
+          @if ($category == $class-prefix-text-decoration) {
+            .#{$class-name} {
+              text-decoration-color: $val;
+            }
+          }
+          @if ($category == $class-prefix-selection-color) {
+            .#{$class-name}::selection {
+              color: $val;
+            }
+          }
+          @if ($category == $class-prefix-selection-background) {
+            .#{$class-name}::selection {
+              background: $val;
+            }
+          }
         }
       }
     }
   }
 }
 
-// allllright! We have color classes! Now just to make classes for the font sizes, weight, and text-decorations
+// allllright! We have color classes! Now when it comes to element states
+// I just some classes for the font sizes, weight, and text-decorations
+// oh yeah and border and outline width
 // because who knows, someone might want to change those on element states too
 // this is the same as the utilities map
-$text-map: (
+$additional-element-states-map: (
   "font-size": (
     "prefix": "font",
     "values": map-size-vals()
@@ -273,14 +327,62 @@ $text-map: (
   "text-decoration": (
     "prefix": "text",
     "values": (
+      "none": none,
       "underline": underline,
       "overline": overline,
-      "line-through": line-through
+      "underover": (
+        underline,
+        overline
+      ),
+      "line-through": line-through,
+      "wavy": wavy
+    )
+  ),
+  "text-decoration-thickness": (
+    "prefix": "decoration",
+    "values": $border-and-outline-widths
+  ),
+  "border-width": (
+    "prefix": "border",
+    "values": $border-and-outline-widths
+  ),
+  "border-top-width": (
+    "prefix": "bt",
+    "values": $border-and-outline-widths
+  ),
+  "border-left-width": (
+    "prefix": "bl",
+    "values": $border-and-outline-widths
+  ),
+  "border-right-width": (
+    "prefix": "br",
+    "values": $border-and-outline-widths
+  ),
+  "border-bottom-width": (
+    "prefix": "bb",
+    "values": $border-and-outline-widths
+  ),
+  "border-style": (
+    "prefix": "border",
+    "values": $border-styles
+  ),
+  "outline-width": (
+    "prefix": "outline",
+    "values": $border-and-outline-widths
+  ),
+  "outline-style": (
+    "prefix": "outline",
+    "values": (
+      "none": none,
+      "dotted": dotted,
+      "solid": solid,
+      "groove": groove,
+      "inset": inset
     )
   )
 );
 
-@each $property, $map in $text-map {
+@each $property, $map in $additional-element-states-map {
   $prefix: map-get($map, "prefix");
   $values: map-get($map, "values");
 
@@ -295,5 +397,3 @@ $text-map: (
     }
   }
 }
-
-// ok .. only a few things left.. and the css file, unpurged, is still only about 100k ..
