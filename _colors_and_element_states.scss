@@ -160,7 +160,6 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
 // now finally, all the element states
 @each $mode in $modes {
   $mode-map: map-get($class-color-map, $mode);
-  $final-map: ();
 
   @if ($mode-map != null) {
     // "night mode"
@@ -243,7 +242,7 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
             outline-color: $val;
           }
         }
-        @if ($category == $class-prefix-text-decoratione) {
+        @if ($category == $class-prefix-text-decoration) {
           .#{$class-name} {
             text-decoration-color: $val;
           }
