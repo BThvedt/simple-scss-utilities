@@ -62,6 +62,19 @@
   @return $return-map;
 }
 
+@function margin-and-padding-vals() {
+  $return-map: map-merge(map-size-vals(), $fraction-map);
+
+  $return-map: map-merge(
+    $return-map,
+    (
+      "auto": auto
+    )
+  );
+
+  @return $return-map;
+}
+
 @function height-and-width-vals() {
   $return-map: map-merge(map-size-vals(), $fraction-map);
 
@@ -81,49 +94,43 @@
 $utilities: (
   "padding": (
     "prefix": "p",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "padding-left": (
     "prefix": "p1",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "padding-right": (
     "prefix": "pr",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "padding-top": (
     "prefix": "pt",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "padding-bottom": (
     "prefix": "pb",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "margin": (
     "prefix": "m",
-    "values":
-      map-merge(
-        map-size-vals(),
-        (
-          "auto": auto
-        )
-      )
+    "values": margin-and-padding-vals()
   ),
   "margin-left": (
     "prefix": "ml",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "margin-right": (
     "prefix": "mr",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "margin-top": (
     "prefix": "mt",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "margin-bottom": (
     "prefix": "mb",
-    "values": map-size-vals()
+    "values": margin-and-padding-vals()
   ),
   "border-radius": (
     "prefix": "radius",
