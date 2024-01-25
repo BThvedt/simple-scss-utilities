@@ -143,10 +143,10 @@ $border-radiuses: (
 // also used for text decoration thickness
 $base-border-width: 1px;
 $border-and-outline-widths: (
-  "sm": 1,
-  "md": 2,
-  "lg": 3,
-  "xl": 4
+  "sm": 1px,
+  "md": 2px,
+  "lg": 3px,
+  "xl": 4px
 );
 
 // just helper map specifically for border styles
