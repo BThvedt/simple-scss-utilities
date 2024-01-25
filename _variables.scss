@@ -63,14 +63,14 @@ $primary: #2953f5;
 $secondary: #023c40;
 $error: #cc2936;
 $info: #f69622;
-$text: #231c07;
+$default: #231c07; // I like to use this for text, "text-default"
 $background: #fffffa;
 
 $primary-night: #2953f5;
 $secondary-night: #023c40;
 $error-night: #cc2936;
 $info-night: #f69622;
-$text-night: #231c07;
+$default-night: #231c07;
 $background-night: #fffffa;
 
 // color pallate map for text, background color, borders
@@ -84,8 +84,8 @@ $colors: (
     "sec": $secondary,
     "err": $error,
     "info": $info,
-    "def": $text,
-    "bg": $background,
+    "default": $default,
+    "site-background": $background,
     "blu": #0ad3ff,
     "rd": #e30d1f,
     "ylw": #e5e059,
@@ -101,8 +101,8 @@ $colors: (
     "sec": $secondary,
     "err": $error,
     "info": $info,
-    "def": $text,
-    "bg": $background
+    "default": $default,
+    "site-background": $background
   )
 );
 
