@@ -75,7 +75,7 @@
   @return $return-map;
 }
 
-@function height-and-width-vals() {
+@function height-and-width-vals($property) {
   $return-map: map-merge(map-size-vals(), $fraction-map);
 
   $return-map: map-merge(
@@ -84,6 +84,22 @@
       "container": $container-size
     )
   );
+
+  @if ($property == "height") {
+    $return-map: map-merge(
+      $return-map,
+      (
+        "screen": 100vh
+      )
+    );
+  } @else if ($property == "width") {
+    $return-map: map-merge(
+      $return-map,
+      (
+        "screen": 100vw
+      )
+    );
+  }
 
   @return $return-map;
 }
@@ -292,43 +308,43 @@ $utilities: (
   ),
   "left": (
     "prefix": "left",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("width")
   ),
   "top": (
     "prefix": "top",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("height")
   ),
   "right": (
     "prefix": "right",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("width")
   ),
   "bottom": (
     "prefix": "bottom",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("height")
   ),
   "width": (
     "prefix": "w",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("width")
   ),
   "height": (
     "prefix": "h",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("height")
   ),
   "min-width": (
     "prefix": "min-w",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("width")
   ),
   "max-width": (
     "prefix": "max-w",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("width")
   ),
   "min-height": (
     "prefix": "min-h",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("height")
   ),
   "max-height": (
     "prefix": "max-h",
-    "values": height-and-width-vals()
+    "values": height-and-width-vals("height")
   )
 );
 
