@@ -118,6 +118,7 @@ $size-multipliers: (
   "xs": 2,
   "s": 4,
   "m": 6,
+  "base-font": 8,
   "std": 8,
   "lg": 10,
   "xl": 12,
@@ -147,6 +148,24 @@ $border-and-outline-widths: (
   "md": 2px,
   "lg": 3px,
   "xl": 4px
+);
+
+// couple other maps ...
+$line-heights: (
+  "sm": 1em,
+  "md": 1.2em,
+  "lg": 1.35em,
+  "xl": 1.5em,
+  "2xl": 2em
+);
+
+$letter-spacing: (
+  "sm": 0.006em,
+  "md": 0.013em,
+  "lg": 0.025em,
+  "xl": 0.044em,
+  "2xl": 0.063em,
+  "3xl": 0.125em
 );
 
 // just helper map specifically for border styles

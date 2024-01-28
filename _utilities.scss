@@ -248,13 +248,40 @@ $utilities: (
       "wrap-reverse": wrap-reverse
     )
   ),
-  "justify-content": (
-    "prefix": "justify",
+  "flex-shrink": (
+    "prefix": "shrink",
+    "values": (
+      "0": 0,
+      "1": 1
+    )
+  ),
+  "flex-grow": (
+    "prefix": "grow",
+    "values": (
+      "0": 0,
+      "1": 1
+    )
+  ),
+  "justify-items": (
+    "prefix": "justify-items",
     "values": (
       "start": flex-start,
       "end": flex-end,
+      "center": center,
+      "stretch": stretch
+    )
+  ),
+  "justify-content": (
+    "prefix": "justify-content",
+    "values": (
+      "normal": normal,
+      "start": flex-start,
+      "end": flex-end,
+      "center": center,
       "around": space-around,
-      "between": space-between
+      "between": space-between,
+      "evenly": space-evenly,
+      "stretch": stretch
     )
   ),
   "align-items": (
@@ -268,14 +295,43 @@ $utilities: (
     )
   ),
   "align-content": (
-    "prefix": "content",
+    "prefix": "align-content",
     "values": (
-      "between": space-between,
-      "around": space-around,
-      "stretch": stretch,
+      "normal": normal,
       "start": flex-start,
-      "end": flex-end
+      "end": flex-end,
+      "center": center,
+      "around": space-around,
+      "between": space-between,
+      "evenly": space-evenly,
+      "stretch": stretch,
+      "baseline": baseline
     )
+  ),
+  "align-self": (
+    "prefix": "align-self",
+    "values": (
+      "auto": auto,
+      "start": flex-start,
+      "end": flex-end,
+      "center": center,
+      "stretch": stretch,
+      "baseline": baseline
+    )
+  ),
+  "justify-self": (
+    "prefix": "justify-self",
+    "values": (
+      "auto": auto,
+      "start": flex-start,
+      "end": flex-end,
+      "center": center,
+      "stretch": stretch
+    )
+  ),
+  "gap": (
+    "prefix": "gap",
+    "values": map-size-vals()
   ),
   "box-shadow": (
     "prefix": "shadow",
@@ -284,6 +340,14 @@ $utilities: (
   "font-size": (
     "prefix": "font",
     "values": map-size-vals()
+  ),
+  "line-height": (
+    "prefix": "line-height",
+    "values": $line-heights
+  ),
+  "letter-spacing": (
+    "prefix": "line-height",
+    "values": $letter-spacing
   ),
   "box-sizing": (
     "prefix": "box-sizing",
