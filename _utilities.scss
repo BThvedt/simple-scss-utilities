@@ -329,10 +329,7 @@ $utilities: (
       "stretch": stretch
     )
   ),
-  "gap": (
-    "prefix": "gap",
-    "values": map-size-vals()
-  ),
+
   "box-shadow": (
     "prefix": "shadow",
     "values": $box-shadows
