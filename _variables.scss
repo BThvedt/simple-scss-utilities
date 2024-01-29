@@ -118,8 +118,23 @@ $size-multipliers: (
   "xs": 2,
   "sm": 4,
   "md": 6,
-  "base-font": 8,
-  "std": 8,
+  "base": 8,
+  "lg": 10,
+  "xl": 12,
+  "2xl": 16,
+  "3xl": 24,
+  "4xl": 32,
+  "5xl": 40
+);
+
+// font sizes might be a little more different than margin or padding sizes
+// so this seperate array reflects that
+$font-size-multipliers: (
+  "0": 0,
+  "xs": 3,
+  "sm": 5,
+  "md": 7,
+  "base": 8,
   "lg": 10,
   "xl": 12,
   "2xl": 16,

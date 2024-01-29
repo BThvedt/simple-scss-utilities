@@ -62,6 +62,21 @@
   @return $return-map;
 }
 
+@function map-font-size-vals() {
+  $return-map: ();
+
+  @each $key, $val in $font-size-multipliers {
+    $return-map: map-merge(
+      $return-map,
+      (
+        $key: $base-size * $val
+      )
+    );
+  }
+
+  @return $return-map;
+}
+
 @function margin-and-padding-vals() {
   $return-map: map-merge(map-size-vals(), $fraction-map);
 
@@ -352,7 +367,7 @@ $utilities: (
   ),
   "font-size": (
     "prefix": "font",
-    "values": map-size-vals()
+    "values": map-font-size-vals()
   ),
   "line-height": (
     "prefix": "line-height",
