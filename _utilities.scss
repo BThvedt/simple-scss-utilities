@@ -148,6 +148,22 @@ $utilities: (
     "prefix": "mb",
     "values": margin-and-padding-vals()
   ),
+  "mx": (
+    "prefix": "",
+    "values": margin-and-padding-vals()
+  ),
+  "my": (
+    "prefix": "",
+    "values": margin-and-padding-vals()
+  ),
+  "px": (
+    "prefix": "",
+    "values": margin-and-padding-vals()
+  ),
+  "py": (
+    "prefix": "",
+    "values": margin-and-padding-vals()
+  ),
   "border-radius": (
     "prefix": "radius",
     "values": $border-radiuses
@@ -434,17 +450,54 @@ $utilities: (
   @return $class-string;
 }
 
+// would be nice to have mx and my classes but gotta handle em differnety
+// this helps in the following function
+$mx-and-my: ("mx", "my", "px", "py");
+
 // a mixin that essentially generates a ton of classes
 @mixin generate-classes($breakpointKey) {
   @each $property, $map in $utilities {
     $prefix: map-get($map, "prefix");
     $values: map-get($map, "values");
 
-    @each $valueKey, $val in $values {
-      $class-string: get-class-string($breakpointKey, $valueKey, $prefix);
+    @if index($mx-and-my, $property) {
+      // in these special cases, the 'prefix' is margin or padding
+      @debug $property;
 
-      .#{$class-string} {
-        #{$property}: $val;
+      @each $valueKey, $val in $values {
+        $class-string: get-class-string($breakpointKey, $valueKey, $property);
+        @if ($property == "mx") {
+          .#{$class-string} {
+            margin-left: $val;
+            margin-right: $val;
+          }
+        } @else if ($property == "my") {
+          .#{$class-string} {
+            margin-top: $val;
+            margin-bottom: $val;
+          }
+        } @else if ($property == "px") {
+          .#{$class-string} {
+            padding-left: $val;
+            padding-right: $val;
+          }
+        } @else if ($property == "py") {
+          .#{$class-string} {
+            padding-top: $val;
+            padding-bottom: $val;
+          }
+        }
+      }
+    } @else {
+      // the general case. the Map key in utilities is the css propery,
+      // a class string for each break point and key in the values map is generated,
+      // and the values are the values in the value map
+      @each $valueKey, $val in $values {
+        $class-string: get-class-string($breakpointKey, $valueKey, $prefix);
+
+        .#{$class-string} {
+          #{$property}: $val;
+        }
       }
     }
   }
