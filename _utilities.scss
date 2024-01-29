@@ -113,7 +113,7 @@ $utilities: (
     "values": margin-and-padding-vals()
   ),
   "padding-left": (
-    "prefix": "p1",
+    "prefix": "pl",
     "values": margin-and-padding-vals()
   ),
   "padding-right": (
@@ -462,7 +462,6 @@ $mx-and-my: ("mx", "my", "px", "py");
 
     @if index($mx-and-my, $property) {
       // in these special cases, the 'prefix' is margin or padding
-      @debug $property;
 
       @each $valueKey, $val in $values {
         $class-string: get-class-string($breakpointKey, $valueKey, $property);
