@@ -127,6 +127,14 @@ $utilities: (
     "prefix": "p",
     "values": margin-and-padding-vals()
   ),
+  "px": (
+    "prefix": "",
+    "values": margin-and-padding-vals()
+  ),
+  "py": (
+    "prefix": "",
+    "values": margin-and-padding-vals()
+  ),
   "padding-left": (
     "prefix": "pl",
     "values": margin-and-padding-vals()
@@ -143,8 +151,17 @@ $utilities: (
     "prefix": "pb",
     "values": margin-and-padding-vals()
   ),
+
   "margin": (
     "prefix": "m",
+    "values": margin-and-padding-vals()
+  ),
+  "mx": (
+    "prefix": "",
+    "values": margin-and-padding-vals()
+  ),
+  "my": (
+    "prefix": "",
     "values": margin-and-padding-vals()
   ),
   "margin-left": (
@@ -163,22 +180,7 @@ $utilities: (
     "prefix": "mb",
     "values": margin-and-padding-vals()
   ),
-  "mx": (
-    "prefix": "",
-    "values": margin-and-padding-vals()
-  ),
-  "my": (
-    "prefix": "",
-    "values": margin-and-padding-vals()
-  ),
-  "px": (
-    "prefix": "",
-    "values": margin-and-padding-vals()
-  ),
-  "py": (
-    "prefix": "",
-    "values": margin-and-padding-vals()
-  ),
+
   "border-radius": (
     "prefix": "radius",
     "values": $border-radiuses
