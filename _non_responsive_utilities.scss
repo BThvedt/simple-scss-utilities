@@ -154,7 +154,22 @@ $non-responsive-utilities: (
       "hidden": hidden,
       "collapse": collapse
     )
-  )
+  ),
+  "cursor": {"prefix": "cursor",
+  "values": (
+    "auto": "auto",
+    "pointer": "pointer",
+    "progress": "progress",
+    "wait": "wait",
+    "move": "move",
+    "not-allowed": "not-allowed",
+    "grab": "grab",
+    "grabbing": "grabbing",
+    "zoom-in": "zoom-in",
+    "zoom-out": "zoom-out",
+    "all-scroll": "all-scroll",
+    "text": "text"
+  )}
 );
 
 @each $property, $map in $non-responsive-utilities {
