@@ -363,14 +363,15 @@ $utilities: (
     )
   ),
 
-  "box-shadow": (
-    "prefix": "shadow",
-    "values": $box-shadows
-  ),
-  "font-size": (
-    "prefix": "font",
-    "values": map-font-size-vals()
-  ),
+  // "box-shadow": (
+  //   "prefix": "shadow",
+  //   "values": $box-shadows
+  // ),
+  "font-size":
+    (
+      "prefix": "font",
+      "values": map-font-size-vals()
+    ),
   "line-height": (
     "prefix": "line-height",
     "values": $line-heights

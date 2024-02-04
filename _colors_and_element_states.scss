@@ -50,7 +50,7 @@ $class-prefix-background: "bg"; // background
 $class-prefix-border: "border"; // border color
 $class-prefix-outline: "outline"; // ..etc
 $class-prefix-text-decoration: "text-decoration-color";
-// these need to be handled different
+// these need to be handled different. Gotta have those text-selection classes though!
 $class-prefix-selection-color: "selection-color";
 $class-prefix-selection-background: "selection-bg";
 
@@ -58,8 +58,6 @@ $class-prefix-selection-background: "selection-bg";
 $class-prefixes: $class-prefix-text, $class-prefix-background,
   $class-prefix-border, $class-prefix-outline, $class-prefix-text-decoration,
   $class-prefix-selection-color, $class-prefix-selection-background;
-$element-states: "hover", "active", "visited", "target", "focus", "focus_within",
-  "focus_visible";
 
 @each $mode in $modes {
   $mode-color-map: map-get($colors, $mode);
@@ -71,7 +69,7 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
 
   @if ($mode-color-map != null) {
     @each $color, $val in $mode-color-map {
-      // first merge the color into mode colro map
+      // first merge the color into mode color map
       $final-mode-color-map: map-merge(
         $final-mode-color-map,
         (
@@ -79,29 +77,31 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
         )
       );
 
-      // then add the light, lighter, dark, darker values
-      @each $modifier-map-key, $modifier-map in $color-modifiers {
-        @if ($modifier-map-key == "light") {
-          @each $modifierKey, $modifierVal in $modifier-map {
-            $new-color-key: #{$color} + "-" + #{$modifierKey};
-            $new-color-val: mix(white, $val, $modifierVal);
-            $final-mode-color-map: map-merge(
-              $final-mode-color-map,
-              (
-                $new-color-key: $new-color-val
-              )
-            );
-          }
-        } @else {
-          @each $modifierKey, $modifierVal in $modifier-map {
-            $new-color-key: #{$color} + "-" + #{$modifierKey};
-            $new-color-val: mix(black, $val, $modifierVal);
-            $final-mode-color-map: map-merge(
-              $final-mode-color-map,
-              (
-                $new-color-key: $new-color-val
-              )
-            );
+      @if ($color != "white" and $color != "black") {
+        // then add the light, lighter, dark, darker values
+        @each $modifier-map-key, $modifier-map in $color-modifiers {
+          @if ($modifier-map-key == "light") {
+            @each $modifierKey, $modifierVal in $modifier-map {
+              $new-color-key: #{$color} + "-" + #{$modifierKey};
+              $new-color-val: mix(white, $val, $modifierVal);
+              $final-mode-color-map: map-merge(
+                $final-mode-color-map,
+                (
+                  $new-color-key: $new-color-val
+                )
+              );
+            }
+          } @else {
+            @each $modifierKey, $modifierVal in $modifier-map {
+              $new-color-key: #{$color} + "-" + #{$modifierKey};
+              $new-color-val: mix(black, $val, $modifierVal);
+              $final-mode-color-map: map-merge(
+                $final-mode-color-map,
+                (
+                  $new-color-key: $new-color-val
+                )
+              );
+            }
           }
         }
       }
@@ -155,8 +155,6 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
   }
 }
 
-// @debug $class-color-map;
-
 // now finally, all the element states
 @each $mode in $modes {
   $mode-map: map-get($class-color-map, $mode);
@@ -181,10 +179,14 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
         );
 
         // then do it again for each element state
-        @each $element-state in $element-states {
+        @each $pseudo-class in $pseudo-classes {
           // wait.. I think I did this wrong lol
           // I like the class name .. but .. the psudeo state I think is wrong
-          $state-class-name: #{$element-state} + "\\:"+ #{$class-name};
+          $state-class-name: (
+            "class-name": #{$pseudo-class} + "\\:"+ #{$class-name},
+            "pseudo-class": #{$pseudo-class}
+          );
+
           $final-element-map: map-merge(
             $final-element-map,
             (
@@ -216,47 +218,81 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
 // I think it's working.. I hope to the lord it is ..
 // .. let's make the classes lol
 
+@mixin generate-final-rule($class-name, $property, $val) {
+  @if (type-of($class-name) != "map") {
+    // @debug $class-name;
+    .#{$class-name} {
+      #{$property}: $val;
+    }
+  } @else {
+    // as a desperate hack I made $class-name into a map
+    $pseudo-class-name: map-get($class-name, "class-name");
+    $pseudo-class: map-get($class-name, "pseudo-class");
+    .#{$pseudo-class-name} {
+      &:#{$pseudo-class} {
+        #{$property}: $val;
+      }
+    }
+  }
+}
+
 @each $mode, $mode-map in $final-map {
   @if ($mode== "default") {
     @each $category, $category-map in $mode-map {
       @each $class-name, $val in $category-map {
         // there's a better way to have done this, but at this point
         // I'm not gonna go back and write the above loops again
+
         @if ($category == $class-prefix-text) {
-          .#{$class-name} {
-            color: $val;
-          }
+          @include generate-final-rule($class-name, color, $val);
         }
         @if ($category == $class-prefix-background) {
-          .#{$class-name} {
-            background-color: $val;
-          }
+          @include generate-final-rule($class-name, background-color, $val);
         }
         @if ($category == $class-prefix-border) {
-          .#{$class-name} {
-            border-color: $val;
-          }
+          @include generate-final-rule($class-name, border-color, $val);
         }
         @if ($category == $class-prefix-outline) {
-          .#{$class-name} {
-            outline-color: $val;
-          }
+          @include generate-final-rule($class-name, outline-color, $val);
         }
         @if ($category == $class-prefix-text-decoration) {
-          .#{$class-name} {
-            text-decoration-color: $val;
-          }
+          @include generate-final-rule(
+            $class-name,
+            text-decoration-color,
+            $val
+          );
         }
         @if ($category == $class-prefix-selection-color) {
-          .#{$class-name}::selection {
-            color: $val;
+          @if (type-of($class-name) != "map") {
+            .#{$class-name}::selection {
+              color: $val;
+            }
+          } @else {
+            $pseudo-class-name: map-get($class-name, "class-name");
+            $pseudo-class: map-get($class-name, "pseudo-class");
+            .#{$pseudo-class-name} {
+              &:#{$pseudo-class}::selection {
+                color: $val;
+              }
+            }
           }
         }
         @if ($category == $class-prefix-selection-background) {
-          .#{$class-name}::selection {
-            background: $val;
+          @if (type-of($class-name) != "map") {
+            .#{$class-name}::selection {
+              background-color: $val;
+            }
+          } @else {
+            $pseudo-class-name: map-get($class-name, "class-name");
+            $pseudo-class: map-get($class-name, "pseudo-class");
+            .#{$pseudo-class-name} {
+              &:#{$pseudo-class}::selection {
+                background-color: $val;
+              }
+            }
           }
         }
+
         // $class-prefix-text-decoration
       }
     }
@@ -265,38 +301,52 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
       @each $class-name, $val in $category-map {
         .#{$mode} {
           @if ($category == $class-prefix-text) {
-            .#{$class-name} {
-              color: $val;
-            }
+            @include generate-final-rule($class-name, color, $val);
           }
           @if ($category == $class-prefix-background) {
-            .#{$class-name} {
-              background-color: $val;
-            }
+            @include generate-final-rule($class-name, background-color, $val);
           }
           @if ($category == $class-prefix-border) {
-            .#{$class-name} {
-              border-color: $val;
-            }
+            @include generate-final-rule($class-name, border-color, $val);
           }
           @if ($category == $class-prefix-outline) {
-            .#{$class-name} {
-              outline-color: $val;
-            }
+            @include generate-final-rule($class-name, outline-color, $val);
           }
           @if ($category == $class-prefix-text-decoration) {
-            .#{$class-name} {
-              text-decoration-color: $val;
-            }
+            @include generate-final-rule(
+              $class-name,
+              text-decoration-color,
+              $val
+            );
           }
           @if ($category == $class-prefix-selection-color) {
-            .#{$class-name}::selection {
-              color: $val;
+            @if (type-of($class-name) != "map") {
+              .#{$class-name}::selection {
+                color: $val;
+              }
+            } @else {
+              $pseudo-class-name: map-get($class-name, "class-name");
+              $pseudo-class: map-get($class-name, "pseudo-class");
+              .#{$pseudo-class-name} {
+                &:#{$pseudo-class}::selection {
+                  color: $val;
+                }
+              }
             }
           }
           @if ($category == $class-prefix-selection-background) {
-            .#{$class-name}::selection {
-              background: $val;
+            @if (type-of($class-name) != "map") {
+              .#{$class-name}::selection {
+                background-color: $val;
+              }
+            } @else {
+              $pseudo-class-name: map-get($class-name, "class-name");
+              $pseudo-class: map-get($class-name, "pseudo-class");
+              .#{$pseudo-class-name} {
+                &:#{$pseudo-class}::selection {
+                  background-color: $val;
+                }
+              }
             }
           }
         }
@@ -309,7 +359,7 @@ $element-states: "hover", "active", "visited", "target", "focus", "focus_within"
 // I just some classes for the font sizes, weight, and text-decorations
 // oh yeah and border and outline width
 // because who knows, someone might want to change those on element states too
-// this is the same as the utilities map
+// this is much simpler without color haha
 $additional-element-states-map: (
   "font-size": (
     "prefix": "font",
@@ -385,13 +435,15 @@ $additional-element-states-map: (
   $prefix: map-get($map, "prefix");
   $values: map-get($map, "values");
 
-  @each $state in $element-states {
-    // make state like hover:font-size-xl and focus:text-decoration-underline and stuff like that
+  @each $pseudo-class in $pseudo-classes {
+    // make pseudo-class like hover:font-size-xl and focus:text-decoration-underline and stuff like that
     @each $valueKey, $val in $values {
-      $class-string: #{$state} + "\\:"+ #{$prefix} + "-" + #{$valueKey};
+      $class-string: #{$pseudo-class} + "\\:"+ #{$prefix} + "-" + #{$valueKey};
 
       .#{$class-string} {
-        #{$property}: $val;
+        &:#{$pseudo-class} {
+          #{$property}: $val;
+        }
       }
     }
   }

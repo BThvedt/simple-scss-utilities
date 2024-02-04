@@ -66,7 +66,7 @@ $info: #f69622;
 $default: #252832; // I like to use this for text, "text-default"
 $background: #fefdfc;
 
-$primary-night: #2953f5;
+$primary-night: #9fb1f7;
 $secondary-night: #023c40;
 $error-night: #cc2936;
 $info-night: #f69622;
@@ -86,23 +86,19 @@ $colors: (
     "info": $info,
     "default": $default,
     "site-background": $background,
-    "blue": #0ad3ff,
-    "red": #e30d1f,
-    "yellow": #e5e059,
-    "green": #17a398,
-    "orange": #f58a07,
-    "purple": #3d2645,
-    "grey": #798071,
-    "black": #0e131f,
-    "white": #fffffa
+    "white": #fff,
+    "black": #000,
+    "purple": #510094,
+    "green": #00940c
   ),
   "night": (
-    "pri": $primary,
-    "sec": $secondary,
-    "err": $error,
-    "info": $info,
-    "default": $default,
-    "site-background": $background
+    "pri": $primary-night,
+    "sec": $secondary-night,
+    "err": $error-night,
+    "info": $info-night,
+    "default": $default-night,
+    "site-background": $background-night,
+    "purple": #ee39d0
   )
 );
 
@@ -194,40 +190,6 @@ $border-styles: (
   "inset": inset
 );
 
-// box shadows
-// test out when back
-// goal.. get the grid system up
-// and color system up.. and get site up
-// goal for weekend
-$box-shadows: (
-  "none": 0,
-  "xs": (
-    0px 1px 3px rgba(0, 0, 0, 0.15),
-    0px -1px 1px rgba(0, 0, 0, 0.1)
-  ),
-  "sm": (
-    0px 2px 3px 1px rgba(0, 0, 0, 0.1),
-    0px -1px 2px rgba(0, 0, 0, 0.07)
-  ),
-  "md": (
-    0px 3px 5px 1px rgba(0, 0, 0, 0.1),
-    0px -1px 4px 1px rgba(0, 0, 0, 0.07)
-  ),
-  "lg": (
-    0px 3px 7px 1px rgba(0, 0, 0, 0.15),
-    0px -2px 4px 1px rgba(0, 0, 0, 0.1)
-  ),
-
-  "xl": (
-    0px 4px 8px 2px rgba(0, 0, 0, 0.15),
-    0px -2px 5px 1px rgba(0, 0, 0, 0.1)
-  ),
-  "2xl": (
-    0px 5px 10px 2px rgba(0, 0, 0, 0.15),
-    0px -3px 7px 2px rgba(0, 0, 0, 0.1)
-  )
-);
-
 $grid-columns: 12;
 $grid-gaps: (
   "none": 0,
@@ -262,3 +224,69 @@ $fraction-map: (
   "11\\/12": 91.7%,
   "full": 100%
 );
+
+// hmm
+$box-shadows: (
+  "xs": (
+    (
+      "shadow": 0px 1px 3px 0px,
+      "opacity": 0.15
+    ),
+    (
+      "shadow": 0px -1px 1px 0px,
+      "opacity": 0.1
+    )
+  ),
+  "sm": (
+    (
+      "shadow": 0px 2px 3px 1px,
+      "opacity": 0.1
+    ),
+    (
+      "shadow": 0px -1px 2px 0px,
+      "opacity": 0.07
+    )
+  ),
+  "md": (
+    (
+      "shadow": 0px 3px 5px 1px,
+      "opacity": 0.1
+    ),
+    (
+      "shadow": 0px -1px 4px 1px,
+      "opacity": 0.07
+    )
+  ),
+  "lg": (
+    (
+      "shadow": 0px 3px 7px 1px,
+      "opacity": 0.15
+    ),
+    (
+      "shadow": 0px -2px 4px 1px,
+      "opacity": 0.1
+    )
+  ),
+  "xl": (
+    (
+      "shadow": 0px 4px 8px 2px,
+      "opacity": 0.15
+    ),
+    (
+      "shadow": 0px -2px 5px 1px,
+      "opacity": 0.1
+    )
+  ),
+  "2xl": (
+    (
+      "shadow": 0px 5px 10px 2px,
+      "opacity": 0.15
+    ),
+    (
+      "shadow": 0px -3px 7px 2px,
+      "opacity": 0.1
+    )
+  )
+);
+
+$pseudo-classes: "hover", "active", "focus"; // can be edited
