@@ -225,6 +225,28 @@ $fraction-map: (
   "full": 100%
 );
 
+$rems-for-heights-and-widths: (
+  "1": 1rem,
+  "2": 2rem,
+  "3": 3rem,
+  "4": 4rem,
+  "6": 6rem,
+  "8": 8rem,
+  "10": 10rem,
+  "12": 12rem,
+  "16": 16rem,
+  "20": 20rem,
+  "24": 24rem,
+  "30": 30rem,
+  "36": 36rem,
+  "42": 42rem,
+  "48": 48rem,
+  "56": 56rem,
+  "64": 64rem,
+  "72": 72rem,
+  "80": 80rem
+);
+
 // hmm
 $box-shadows: (
   "xs": (

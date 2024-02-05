@@ -92,6 +92,7 @@
 
 @function height-and-width-vals($property) {
   $return-map: map-merge(map-size-vals(), $fraction-map);
+  $return-map: map-merge(map-size-vals(), $rems-for-heights-and-widths);
 
   $return-map: map-merge(
     $return-map,
@@ -100,17 +101,39 @@
     )
   );
 
-  @if ($property == "height") {
+  @if (
+    $property ==
+      "height" or
+      $property ==
+      "min-height" or
+      $property ==
+      "max-height"
+  ) {
     $return-map: map-merge(
       $return-map,
       (
+        "1\\/4-screen": 25vh,
+        "1\\/3-screen": 33vh,
+        "1\\/2-screen": 50vh,
         "screen": 100vh
       )
     );
-  } @else if ($property == "width") {
+  } @else if
+    (
+      $property ==
+        "width" or
+        $property ==
+        "min-width" or
+        $property ==
+        "max-width"
+    )
+  {
     $return-map: map-merge(
       $return-map,
       (
+        "1\\/4-screen": 25vw,
+        "1\\/3-screen": 33vw,
+        "1\\/2-screen": 50vw,
         "screen": 100vw
       )
     );
