@@ -59,45 +59,27 @@ $color-modifiers: (
 );
 
 // theme colors
-$primary: #2953f5;
-$secondary: #023c40;
-$error: #cc2936;
-$info: #f69622;
-$default: #252832; // I like to use this for text, "text-default"
-$background: #fefdfc;
-
-$primary-night: #9fb1f7;
-$secondary-night: #023c40;
-$error-night: #cc2936;
-$info-night: #f69622;
-$default-night: #252832;
-$background-night: #fefdfc;
 
 // color pallate map for text, background color, borders
 // each color gets a 'light' and 'lighter', 'dark' amd "darker' modifier
 // also, each color can optionally be overridden in a differnet mode,
 // the key of the sub-map has to be the same as the mode
 // and the color name has to be defined
+
+// red blue green purple default background
 $colors: (
   "default": (
-    "pri": $primary,
-    "sec": $secondary,
-    "err": $error,
-    "info": $info,
-    "default": $default,
-    "site-background": $background,
     "white": #fff,
     "black": #000,
-    "purple": #510094,
-    "green": #00940c
+    "blue": #2953f5,
+    "red": #cc2936,
+    "green": #00940c,
+    "orange": #f69622,
+    "purple": #452c63,
+    "default": #252832,
+    "background": #fefdfc
   ),
   "night": (
-    "pri": $primary-night,
-    "sec": $secondary-night,
-    "err": $error-night,
-    "info": $info-night,
-    "default": $default-night,
-    "site-background": $background-night,
     "purple": #ee39d0
   )
 );
