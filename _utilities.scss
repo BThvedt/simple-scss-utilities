@@ -92,7 +92,7 @@
 
 @function height-and-width-vals($property) {
   $return-map: map-merge(map-size-vals(), $fraction-map);
-  $return-map: map-merge(map-size-vals(), $rems-for-heights-and-widths);
+  $return-map: map-merge($return-map, $rems-for-heights-and-widths);
 
   $return-map: map-merge(
     $return-map,
