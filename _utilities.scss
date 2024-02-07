@@ -142,6 +142,24 @@
   @return $return-map;
 }
 
+@function position-vals($property) {
+  $return-map: ();
+
+  @if ($property == "height") {
+    $return-map: map-merge(
+      height-and-width-vals("height"),
+      $px-for-nudging-position
+    );
+  } @else if ($property == "width") {
+    $return-map: map-merge(
+      height-and-width-vals("width"),
+      $px-for-nudging-position
+    );
+  }
+
+  @return $return-map;
+}
+
 // A map of all the utility values I want
 // some of the arrays of values are mapped with the
 // previous function
@@ -426,19 +444,19 @@ $utilities: (
   ),
   "left": (
     "prefix": "left",
-    "values": height-and-width-vals("width")
+    "values": position-vals("width")
   ),
   "top": (
     "prefix": "top",
-    "values": height-and-width-vals("height")
+    "values": position-vals("height")
   ),
   "right": (
     "prefix": "right",
-    "values": height-and-width-vals("width")
+    "values": position-vals("width")
   ),
   "bottom": (
     "prefix": "bottom",
-    "values": height-and-width-vals("height")
+    "values": position-vals("height")
   ),
   "width": (
     "prefix": "w",
