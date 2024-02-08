@@ -588,7 +588,7 @@ $numOfBreakpoints: length($breakpointKeys);
       $nextKey: nth($breakpointKeys, $breakpointIndex + 1);
 
       @include maxMediaQuery($nextKey) {
-        @include generate-classes($nextKey, "max");
+        @include generate-classes($breakpointKey, "max");
       }
     }
   }
