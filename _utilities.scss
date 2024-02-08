@@ -403,16 +403,27 @@ $utilities: (
       "stretch": stretch
     )
   ),
-
-  // "box-shadow": (
-  //   "prefix": "shadow",
-  //   "values": $box-shadows
-  // ),
-  "font-size":
-    (
-      "prefix": "font",
-      "values": map-font-size-vals()
-    ),
+  "filter": (
+    "prefix": "filter",
+    "values": (
+      "blur-sm": blur(2px),
+      "blur-md": blur(4px),
+      "blur-lg": blur(6px),
+      "contrast-sm": contrast(0.75),
+      "contrast-md": contrast(1.25),
+      "contrast-lg": contrast(1.75),
+      "greyscale-sm": greyscale(0.33),
+      "greyscale-md": greyscale(0.67),
+      "greyscale-lg": greyscale(1),
+      "saturate-sm": saturate(0.5),
+      "saturate-md": saturate(2),
+      "saturate-lg": saturate(3)
+    )
+  ),
+  "font-size": (
+    "prefix": "font",
+    "values": map-font-size-vals()
+  ),
   "line-height": (
     "prefix": "line-height",
     "values": $line-heights
