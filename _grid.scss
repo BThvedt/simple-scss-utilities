@@ -45,12 +45,30 @@
       }
     }
   } @else {
-    @include mediaQuery($breakpointKey) {
-      @for $i from 1 through $grid-columns {
-        .#{$breakpointKey}\:col-#{$i} {
-          box-sizing: border-box;
-          flex-grow: 0;
-          width: math.div($i * 100%, $grid-columns);
+    @if ($breakpointVal != 0) {
+      @include mediaQuery($breakpointKey) {
+        @for $i from 1 through $grid-columns {
+          .#{$breakpointKey}\:col-#{$i} {
+            box-sizing: border-box;
+            flex-grow: 0;
+            width: math.div($i * 100%, $grid-columns);
+          }
+        }
+      }
+    }
+
+    $breakpointIndex: index($breakpointKeys, $breakpointKey);
+
+    @if ($breakpointIndex < $numOfBreakpoints) {
+      $nextKey: nth($breakpointKeys, $breakpointIndex + 1);
+
+      @include maxMediaQuery($nextKey) {
+        @for $i from 1 through $grid-columns {
+          .max-#{$breakpointKey}\:col-#{$i} {
+            box-sizing: border-box;
+            flex-grow: 0;
+            width: math.div($i * 100%, $grid-columns);
+          }
         }
       }
     }

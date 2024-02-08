@@ -569,16 +569,27 @@ $mx-and-my: ("mx", "my", "px", "py");
 // warning: this is A LOT of css lol
 // since the non-breakpoint classes are generated first,
 // the breakpoint classes should overide when the breakpoitns are toggeled
+$breakpointKeys: map-keys($breakpoints);
+$numOfBreakpoints: length($breakpointKeys);
+
 @each $breakpointKey, $breakpointVal in $breakpoints {
   @if ($breakpointKey == "_") {
     @include generate-classes($breakpointKey, "");
   } @else {
-    @include mediaQuery($breakpointKey) {
-      @include generate-classes($breakpointKey, "");
+    @if ($breakpointVal != 0) {
+      @include mediaQuery($breakpointKey) {
+        @include generate-classes($breakpointKey, "");
+      }
     }
 
-    @include maxMediaQuery($breakpointKey) {
-      @include generate-classes($breakpointKey, "max");
+    $breakpointIndex: index($breakpointKeys, $breakpointKey);
+
+    @if ($breakpointIndex < $numOfBreakpoints) {
+      $nextKey: nth($breakpointKeys, $breakpointIndex + 1);
+
+      @include maxMediaQuery($nextKey) {
+        @include generate-classes($nextKey, "max");
+      }
     }
   }
 }
