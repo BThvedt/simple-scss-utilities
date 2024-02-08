@@ -514,7 +514,11 @@ $utilities: (
 $mx-and-my: ("mx", "my", "px", "py");
 
 // a mixin that essentially generates a ton of classes
-@mixin generate-classes($breakpointKey) {
+@mixin generate-classes($breakpointKey, $breakpoint-prefix) {
+  @if ($breakpoint-prefix != "") {
+    $breakpointKey: $breakpoint-prefix + "-" + $breakpointKey;
+  }
+
   @each $property, $map in $utilities {
     $prefix: map-get($map, "prefix");
     $values: map-get($map, "values");
@@ -567,10 +571,14 @@ $mx-and-my: ("mx", "my", "px", "py");
 // the breakpoint classes should overide when the breakpoitns are toggeled
 @each $breakpointKey, $breakpointVal in $breakpoints {
   @if ($breakpointKey == "_") {
-    @include generate-classes($breakpointKey);
+    @include generate-classes($breakpointKey, "");
   } @else {
     @include mediaQuery($breakpointKey) {
-      @include generate-classes($breakpointKey);
+      @include generate-classes($breakpointKey, "");
+    }
+
+    @include maxMediaQuery($breakpointKey) {
+      @include generate-classes($breakpointKey, "max");
     }
   }
 }

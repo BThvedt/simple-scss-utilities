@@ -6,6 +6,12 @@
   }
 }
 
+@mixin maxMediaQuery($size) {
+  @media (max-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+
 // @mixin xs {
 //   @media (min-width: map-get($breakpoints, "xs")) {
 //     @content;
