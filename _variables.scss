@@ -42,7 +42,7 @@ $breakpoints: (
 );
 
 // dark mode ..
-$modes: "default", "dark";
+$modes: "default", "dark-mode";
 
 // lighter and darker
 // for example, the numbers are how much percent lighter or darker the color is
@@ -80,7 +80,7 @@ $colors: (
     "default": #252832,
     "background": #fefdfc
   ),
-  "dark": (
+  "dark-mode": (
     "background": #292d3a,
     "default": #dcdbda,
     "purple": #ee39d0
