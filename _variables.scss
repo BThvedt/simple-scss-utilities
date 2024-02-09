@@ -41,8 +41,8 @@ $breakpoints: (
   "lg": 1024px
 );
 
-// night mode ..
-$modes: "default", "night";
+// dark mode ..
+$modes: "default", "dark";
 
 // lighter and darker
 // for example, the numbers are how much percent lighter or darker the color is
@@ -80,7 +80,7 @@ $colors: (
     "default": #252832,
     "background": #fefdfc
   ),
-  "night": (
+  "dark": (
     "background": #292d3a,
     "default": #dcdbda,
     "purple": #ee39d0
@@ -240,16 +240,6 @@ $px-for-nudging-position: (
 
 // hmm
 $box-shadows: (
-  "xs": (
-    (
-      "shadow": 0px 1px 3px 0px,
-      "opacity": 0.15
-    ),
-    (
-      "shadow": 0px -1px 1px 0px,
-      "opacity": 0.1
-    )
-  ),
   "sm": (
     (
       "shadow": 0px 2px 3px 1px,
@@ -262,16 +252,6 @@ $box-shadows: (
   ),
   "md": (
     (
-      "shadow": 0px 3px 5px 1px,
-      "opacity": 0.1
-    ),
-    (
-      "shadow": 0px -1px 4px 1px,
-      "opacity": 0.07
-    )
-  ),
-  "lg": (
-    (
       "shadow": 0px 3px 7px 1px,
       "opacity": 0.15
     ),
@@ -280,7 +260,7 @@ $box-shadows: (
       "opacity": 0.1
     )
   ),
-  "xl": (
+  "lg": (
     (
       "shadow": 0px 4px 8px 2px,
       "opacity": 0.15
@@ -290,7 +270,7 @@ $box-shadows: (
       "opacity": 0.1
     )
   ),
-  "2xl": (
+  "xl": (
     (
       "shadow": 0px 5px 10px 2px,
       "opacity": 0.15

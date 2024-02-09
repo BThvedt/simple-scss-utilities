@@ -1,10 +1,10 @@
 /*
   This is kinda tricky, first I want classes for theme colors.. that part's easy enough
-  text-color, bg-color, border color. Simple. Then I want day and night modes, that's also 
-  not tough, just have colors that override that if their parent has a night class.
+  text-color, bg-color, border color. Simple. Then I want day and dark modes, that's also 
+  not tough, just have colors that override that if their parent has a dark class.
 
   Then I want classes for hover states. Ok this is starting to get complicated. But not really..
-  say your only theme color is red. And you have a different "red" for day or night. And say the
+  say your only theme color is red. And you have a different "red" for day or dark. And say the
   only state is hover and the only class is for text and it just goes lighter or darker. 
   The scss will look like this: 
 
@@ -25,7 +25,7 @@
   }
   .. 
 
-  .night {
+  .dark {
     .text-red .. (different color) 
     .text-red-lighter .. 
     .hover:text-red-lighter ..  
@@ -38,7 +38,7 @@
 */
 
 // soooo... how to do this ..
-// start with colors for day and night
+// start with colors for light and dark
 // these are some of the ugliest loops I've written
 // compounded by confusing variable names, along with scss's limited map functions..
 // I just wanna get it working and never see these again haha
@@ -160,7 +160,7 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
   $mode-map: map-get($class-color-map, $mode);
 
   @if ($mode-map != null) {
-    // "night mode"
+    // "dark mode"
     $final-mode-map: ();
     @each $class-prefix in $class-prefixes {
       // "color mode - element map"
