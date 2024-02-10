@@ -9,10 +9,13 @@ $extra: (
 );
 
 @each $className, $valueSet in $extra {
-  $properties: map-get($extra, $className);
+  // $properties: map-get($extra, $className);
+  // @debug $className;
   .#{$className} {
-    @each $prop, $val in properties {
+    @each $prop, $val in $valueSet {
       #{$prop}: $val;
     }
+    // @debug #{$prop};
+    // @debug $val;
   }
 }
