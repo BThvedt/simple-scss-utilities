@@ -1,0 +1,18 @@
+// some extra classes I thought would be useful
+
+$extra: (
+  "center": (
+    "display": flex,
+    "align-items": center,
+    "justify-content": center
+  )
+);
+
+@each $className, $valueSet in $extra {
+  $properties: map-get($extra, $className);
+  .#{$className} {
+    @each $prop, $val in properties {
+      #{$prop}: $val;
+    }
+  }
+}
