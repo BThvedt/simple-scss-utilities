@@ -171,7 +171,156 @@ $non-responsive-utilities: (
       "all-scroll": all-scroll,
       "text": text
     )
-  )
+  ),
+  "transition": (
+    "prefix": "transition",
+    "values": (
+      "1a": all 1s ease-in-out,
+      "slow": all 700ms ease-in-out,
+      "med": all 500ms ease-in-out,
+      "default": all 300ms ease-in-out,
+      "fast": all 150ms ease-in-out,
+      "1s-colors": (
+        color 1s ease-in-out,
+        background-color 1s ease-in-out,
+        border-color 1s ease-in-out,
+        text-decoration-color 1s ease-in-out,
+        fill 1s ease-in-out,
+        stronke 1s ease-in-out
+      )
+    )
+  ),
+  // "transition": (
+  //   "prefix": "transition",
+  //   "values": (
+  //     "1s": (
+  //       1s,
+  //       all
+  //     ),
+  //     "slow": (
+  //       700ms,
+  //       all
+  //     ),
+  //     "med": (
+  //       500ms,
+  //       all
+  //     ),
+  //     "default": (
+  //       300ms,
+  //       all
+  //     ),
+  //     "fast": (
+  //       150ms,
+  //       all
+  //     ),
+  //     "1s-colors": (
+  //       color,
+  //       background-color,
+  //       border-color,
+  //       text-decoration-color,
+  //       fill,
+  //       stroke,
+  //       1s
+  //     ),
+  //     "slow-colors": (
+  //       color,
+  //       background-color,
+  //       border-color,
+  //       text-decoration-color,
+  //       fill,
+  //       stroke,
+  //       700ms
+  //     ),
+  //     "med-colors": (
+  //       color,
+  //       background-color,
+  //       border-color,
+  //       text-decoration-color,
+  //       fill,
+  //       stroke,
+  //       500ms
+  //     ),
+  //     "default-colors": (
+  //       color,
+  //       background-color,
+  //       border-color,
+  //       text-decoration-color,
+  //       fill,
+  //       stroke,
+  //       300ms
+  //     ),
+  //     "fast-colors": (
+  //       color,
+  //       background-color,
+  //       border-color,
+  //       text-decoration-color,
+  //       fill,
+  //       stroke,
+  //       150ms
+  //     ),
+  //     "1s-opacity": (
+  //       opacity,
+  //       1s
+  //     ),
+  //     "slow-opacity": (
+  //       opacity,
+  //       700ms
+  //     ),
+  //     "med-opacity": (
+  //       opacity,
+  //       500ms
+  //     ),
+  //     "default-opacity": (
+  //       opacity,
+  //       300ms
+  //     ),
+  //     "fast-opacity": (
+  //       opacity,
+  //       150ms
+  //     ),
+  //     "1s-shadow"
+  //       (
+  //         box-shadow,
+  //         1s
+  //       ),
+  //     "slow-shadow": (
+  //       box-shadow,
+  //       700ms
+  //     ),
+  //     "med-shadow": (
+  //       box-shadow,
+  //       500ms
+  //     ),
+  //     "default-shadow": (
+  //       box-shadow,
+  //       300ms
+  //     ),
+  //     "fast-shadow": (
+  //       box-shadow,
+  //       150ms
+  //     ),
+  //     "1s-transform": (
+  //       transform,
+  //       1s
+  //     ),
+  //     "slow-transform": (
+  //       transform,
+  //       700ms
+  //     ),
+  //     "med-transform": (
+  //       transform,
+  //       500ms
+  //     ),
+  //     "default-transform": (
+  //       transform,
+  //       300ms
+  //     ),
+  //     "fast-transform": (
+  //       transform,
+  //       150ms
+  //     )
+  //   )
+  // )
 );
 
 @each $property, $map in $non-responsive-utilities {
