@@ -492,6 +492,25 @@ $utilities: (
   "max-height": (
     "prefix": "max-h",
     "values": height-and-width-vals("height")
+  ),
+  "list-style-type": (
+    "prefix": "list",
+    "values": (
+      "disc": disc,
+      "circle": circle,
+      "square": square,
+      "upper-alpha": upper-alpha,
+      "lower-alpha": lower-alpha,
+      "upper-roman": upper-roman,
+      "lower-roman": lower-roman
+    )
+  ),
+  "list-style-position": (
+    "prefix": "list-position",
+    "values": (
+      "outside": outside,
+      "inside": inside
+    )
   )
 );
 
@@ -579,7 +598,7 @@ $mx-and-my: ("mx", "my", "px", "py");
 // finally, the magic happens here!
 // warning: this is A LOT of css lol
 // since the non-breakpoint classes are generated first,
-// the breakpoint classes should overide when the breakpoitns are toggeled
+// the breakpoint classes should overide when the breakpoitns are toggeled!
 $breakpointKeys: map-keys($breakpoints);
 $numOfBreakpoints: length($breakpointKeys);
 
@@ -598,9 +617,17 @@ $numOfBreakpoints: length($breakpointKeys);
     @if ($breakpointIndex < $numOfBreakpoints) {
       $nextKey: nth($breakpointKeys, $breakpointIndex + 1);
 
+      @debug $nextKey;
+
       @include maxMediaQuery($nextKey) {
         @include generate-classes($breakpointKey, "max");
       }
     }
+
+    // @else {
+    //   @include maxMediaQuery($breakpointKey) {
+    //     @include generate-classes($breakpointKey, "max");
+    //   }
+    // }
   }
 }
