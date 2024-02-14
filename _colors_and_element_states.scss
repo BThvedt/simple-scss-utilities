@@ -116,6 +116,8 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
   }
 }
 
+@debug $color-map;
+
 // now generate the text-{colorname}, bg-{colorname}, border-{colorname} classes
 // alsoe the selection-{colorname}, although that one looks a bit different
 @each $mode in $modes {
@@ -228,6 +230,11 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
     // as a desperate hack I made $class-name into a map
     $pseudo-class-name: map-get($class-name, "class-name");
     $pseudo-class: map-get($class-name, "pseudo-class");
+
+    // @if ($property == background-color) {
+    //   @debug $pseudo-class-name;
+    // }
+
     .#{$pseudo-class-name} {
       &:#{$pseudo-class} {
         #{$property}: $val;
@@ -235,6 +242,8 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
     }
   }
 }
+
+// @debug $final-map;
 
 @each $mode, $mode-map in $final-map {
   @if ($mode== "default") {
@@ -297,9 +306,10 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
       }
     }
   } @else {
-    @each $category, $category-map in $mode-map {
-      @each $class-name, $val in $category-map {
-        .#{$mode} {
+    .#{$mode} {
+      @each $category, $category-map in $mode-map {
+        @each $class-name, $val in $category-map {
+          //.#{$mode} {
           @if ($category == $class-prefix-text) {
             @include generate-final-rule($class-name, color, $val);
           }
@@ -349,6 +359,7 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
               }
             }
           }
+          //}
         }
       }
     }

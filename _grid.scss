@@ -26,14 +26,6 @@
   }
 }
 
-// justify content classes
-// taken care of in utilities
-// @each $val in $layout-values {
-//   .justify-#{$val} {
-//     justify-content: $val;
-//   }
-// }
-
 // alright let's generate col classes
 @each $breakpointKey, $breakpointVal in $breakpoints {
   @if ($breakpointKey == "_") {
