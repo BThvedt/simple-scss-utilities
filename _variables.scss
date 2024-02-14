@@ -50,12 +50,12 @@ $modes: "default", "dark-mode";
 // think it looks a little better
 $color-modifiers: (
   "light": (
-    "lt": 20%,
-    "ltr": 40%
+    "lt": 15%,
+    "ltr": 30%
   ),
   "dark": (
-    "dk": 20%,
-    "dkr": 40%
+    "dk": 15%,
+    "dkr": 30%
   )
 );
 
@@ -82,7 +82,7 @@ $colors: (
   "dark-mode": (
     "background": #292d3a,
     "default": #dcdbda,
-    "blue": #62a0df,
+    "blue": #5798e1,
     "dark-mode-only": #4d5359
   )
 );
