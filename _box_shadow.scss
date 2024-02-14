@@ -103,7 +103,13 @@ $class_data: ();
               box-shadow: #{$shadow-list};
             }
           } @else {
-            .#{$class-name}-#{$size} {
+            $final-class-string: #{$pseudo-class} +
+              "\\:"+
+              #{$class-name} +
+              "-" +
+              #{$size};
+
+            .#{$final-class-string} {
               &:#{$pseudo-class} {
                 box-shadow: #{$shadow-list};
               }
@@ -117,4 +123,16 @@ $class_data: ();
 
 .shadow-none {
   box-shadow: none;
+}
+
+$pseudo-classes: "hover", "active", "focus"; // can be edited
+
+@each $pseudo-class in $pseudo-classes {
+  $final-class-string: #{$pseudo-class} + "\\:shadow-none";
+
+  .#{$final-class-string} {
+    &:#{$pseudo-class} {
+      box-shadow: none;
+    }
+  }
 }
