@@ -60,3 +60,7 @@ video {
   border-style: solid;
   // border-color: theme('borderColor.DEFAULT', currentColor); <- work on this once I have variables ..
 }
+
+input {
+  outline: 0;
+}
