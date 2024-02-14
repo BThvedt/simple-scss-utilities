@@ -309,7 +309,6 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
     .#{$mode} {
       @each $category, $category-map in $mode-map {
         @each $class-name, $val in $category-map {
-          //.#{$mode} {
           @if ($category == $class-prefix-text) {
             @include generate-final-rule($class-name, color, $val);
           }
@@ -359,7 +358,6 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
               }
             }
           }
-          //}
         }
       }
     }
