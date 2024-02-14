@@ -63,6 +63,30 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
   $mode-color-map: map-get($colors, $mode);
   $final-mode-color-map: ();
 
+  // first things first .. make sure each mode has all the colors in default if they
+  // haven't been overridden
+  // this is so that pseudo classes in other modes don't have their specifity overridden
+  // for example a green button with active:bg-red, the pseudo class in dark-mode will be
+  // overridden by .dark-mode .green for example, so we still need a .dark-mode active:bg-red
+  // even if it's not overridden
+
+  @if ($mode != "default") {
+    $default_colors: map-get($colors, "default");
+    @each $colorKey, $colorVal in $default_colors {
+      $aDefaultColor: map-get($mode-color-map, $colorKey);
+      @if ($aDefaultColor == null) {
+        // color does not exist, map merge the color into mode-color-mape
+        // @debug $colorKey;
+        $mode-color-map: map-merge(
+          $mode-color-map,
+          (
+            $colorKey: $colorVal
+          )
+        );
+      }
+    }
+  }
+
   // first, let's attach the modifiers to each color
   // these are some ugly loops.. lol
   // I prefer mix with black or white vs lighten or darkent
@@ -116,7 +140,7 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
   }
 }
 
-@debug $color-map;
+// @debug $color-map;
 
 // now generate the text-{colorname}, bg-{colorname}, border-{colorname} classes
 // alsoe the selection-{colorname}, although that one looks a bit different

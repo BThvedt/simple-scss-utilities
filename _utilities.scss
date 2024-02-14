@@ -617,7 +617,7 @@ $numOfBreakpoints: length($breakpointKeys);
     @if ($breakpointIndex < $numOfBreakpoints) {
       $nextKey: nth($breakpointKeys, $breakpointIndex + 1);
 
-      @debug $nextKey;
+      // @debug $nextKey;
 
       @include maxMediaQuery($nextKey) {
         @include generate-classes($breakpointKey, "max");
