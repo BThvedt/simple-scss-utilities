@@ -49,7 +49,7 @@ $class-prefix-text: "text"; // for text color
 $class-prefix-background: "bg"; // background
 $class-prefix-border: "border"; // border color
 $class-prefix-outline: "outline"; // ..etc
-$class-prefix-text-decoration: "text-decoration-color";
+$class-prefix-text-decoration: "decoration";
 // these need to be handled different. Gotta have those text-selection classes though!
 $class-prefix-selection-color: "selection-color";
 $class-prefix-selection-background: "selection-bg";
