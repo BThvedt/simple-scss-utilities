@@ -35,6 +35,8 @@ $extra: (
   }
 }
 
+$breakpointKeys: map-keys($breakpoints);
+
 @each $breakpointKey, $breakpointVal in $breakpoints {
   @if ($breakpointKey != "_") {
     @if ($breakpointVal != 0) {
