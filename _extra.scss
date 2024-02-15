@@ -8,14 +8,49 @@ $extra: (
   )
 );
 
+// I'm just gonna be lazy and not try to do everything elegantly
+// in utilities I built it up piece by piece..
+// now I'm just gonna make regular classes and then all the reqponsive ones haha
 @each $className, $valueSet in $extra {
-  // $properties: map-get($extra, $className);
-  // @debug $className;
   .#{$className} {
     @each $prop, $val in $valueSet {
       #{$prop}: $val;
     }
-    // @debug #{$prop};
-    // @debug $val;
+  }
+}
+
+@mixin make-responsive-extra-classes($breakpointKey, $breakpoint-prefix) {
+  @if ($breakpoint-prefix != "") {
+    $breakpointKey: $breakpoint-prefix + "-" + $breakpointKey;
+  }
+
+  @each $className, $valueSet in $extra {
+    $class-string: #{$breakpointKey} + "\\:"+ #{$className};
+
+    .#{$class-string} {
+      @each $prop, $val in $valueSet {
+        #{$prop}: $val;
+      }
+    }
+  }
+}
+
+@each $breakpointKey, $breakpointVal in $breakpoints {
+  @if ($breakpointKey != "_") {
+    @if ($breakpointVal != 0) {
+      @include mediaQuery($breakpointKey) {
+        @include make-responsive-extra-classes($breakpointKey, "");
+      }
+    }
+
+    $breakpointIndex: index($breakpointKeys, $breakpointKey);
+
+    @if ($breakpointIndex < $numOfBreakpoints) {
+      $nextKey: nth($breakpointKeys, $breakpointIndex + 1);
+
+      @include maxMediaQuery($nextKey) {
+        @include make-responsive-extra-classes($breakpointKey, "max");
+      }
+    }
   }
 }

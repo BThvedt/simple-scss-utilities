@@ -617,17 +617,9 @@ $numOfBreakpoints: length($breakpointKeys);
     @if ($breakpointIndex < $numOfBreakpoints) {
       $nextKey: nth($breakpointKeys, $breakpointIndex + 1);
 
-      // @debug $nextKey;
-
       @include maxMediaQuery($nextKey) {
         @include generate-classes($breakpointKey, "max");
       }
     }
-
-    // @else {
-    //   @include maxMediaQuery($breakpointKey) {
-    //     @include generate-classes($breakpointKey, "max");
-    //   }
-    // }
   }
 }
