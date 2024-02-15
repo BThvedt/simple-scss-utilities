@@ -7,12 +7,12 @@
 @import "breakpoints";
 
 // utilities (margin, padding, opacity, etc)
+@import "_extra"; // generally less specific than utilites
 @import "utilities";
 @import "grid";
 @import "non_responsive_utilities";
 @import "_colors_and_element_states";
 @import "_box_shadow";
-@import "_extra";
 
 /* 
 	font-family: 'Bebas Neue', sans-serif;
