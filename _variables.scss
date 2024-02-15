@@ -142,8 +142,8 @@ $base-border-width: 1px;
 $border-and-outline-widths: (
   "sm": 1px,
   "md": 2px,
-  "lg": 3px,
-  "xl": 4px
+  "lg": 4px,
+  "xl": 6px
 );
 
 // couple other maps ...
@@ -220,6 +220,7 @@ $rems-for-heights-and-widths: (
   "4": 4rem,
   "5": 5rem,
   "6": 6rem,
+  "7": 7rem,
   "8": 8rem,
   "10": 10rem,
   "12": 12rem,
