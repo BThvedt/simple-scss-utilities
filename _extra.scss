@@ -5,6 +5,16 @@ $extra: (
     "display": flex,
     "align-items": center,
     "justify-content": center
+  ),
+  "center-start": (
+    "display": flex,
+    "align-items": center,
+    "justify-content": flex-start
+  ),
+  "center-end": (
+    "display": flex,
+    "align-items": center,
+    "justify-content": flex-end
   )
 );
 
