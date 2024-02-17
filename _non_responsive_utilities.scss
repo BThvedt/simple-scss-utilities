@@ -175,66 +175,66 @@ $non-responsive-utilities: (
   "transition": (
     "prefix": "transition",
     "values": (
-      "1s": all 1s ease-in-out,
-      "slow": all 700ms ease-in-out,
-      "med": all 500ms ease-in-out,
-      "default": all 300ms ease-in-out,
-      "fast": all 150ms ease-in-out,
+      "1s": all 1s $transition-funciton,
+      "slow": all 700ms $transition-funciton,
+      "med": all 500ms $transition-funciton,
+      "default": all 300ms $transition-funciton,
+      "fast": all 150ms $transition-funciton,
       "1s-colors": (
-        color 1s ease-in-out,
-        background-color 1s ease-in-out,
-        border-color 1s ease-in-out,
-        text-decoration-color 1s ease-in-out,
-        fill 1s ease-in-out,
-        stronke 1s ease-in-out
+        color 1s $transition-funciton,
+        background-color 1s $transition-funciton,
+        border-color 1s $transition-funciton,
+        text-decoration-color 1s $transition-funciton,
+        fill 1s $transition-funciton,
+        stronke 1s $transition-funciton
       ),
       "slow-colors": (
-        color 700ms ease-in-out,
-        background-color 700ms ease-in-out,
-        border-color 700ms ease-in-out,
-        text-decoration-color 700ms ease-in-out,
-        fill 700ms ease-in-out,
-        stronke 700ms ease-in-out
+        color 700ms $transition-funciton,
+        background-color 700ms $transition-funciton,
+        border-color 700ms $transition-funciton,
+        text-decoration-color 700ms $transition-funciton,
+        fill 700ms $transition-funciton,
+        stronke 700ms $transition-funciton
       ),
       "med-colors": (
-        color 500ms ease-in-out,
-        background-color 500ms ease-in-out,
-        border-color 500ms ease-in-out,
-        text-decoration-color 500ms ease-in-out,
-        fill 500ms ease-in-out,
-        stronke 500ms ease-in-out
+        color 500ms $transition-funciton,
+        background-color 500ms $transition-funciton,
+        border-color 500ms $transition-funciton,
+        text-decoration-color 500ms $transition-funciton,
+        fill 500ms $transition-funciton,
+        stronke 500ms $transition-funciton
       ),
       "default-colors": (
-        color 300ms ease-in-out,
-        background-color 300ms ease-in-out,
-        border-color 300ms ease-in-out,
-        text-decoration-color 300ms ease-in-out,
-        fill 300ms ease-in-out,
-        stronke 300ms ease-in-out
+        color 300ms $transition-funciton,
+        background-color 300ms $transition-funciton,
+        border-color 300ms $transition-funciton,
+        text-decoration-color 300ms $transition-funciton,
+        fill 300ms $transition-funciton,
+        stronke 300ms $transition-funciton
       ),
       "fast-colors": (
-        color 150ms ease-in-out,
-        background-color 150ms ease-in-out,
-        border-color 150ms ease-in-out,
-        text-decoration-color 150ms ease-in-out,
-        fill 150ms ease-in-out,
-        stronke 150ms ease-in-out
+        color 150ms $transition-funciton,
+        background-color 150ms $transition-funciton,
+        border-color 150ms $transition-funciton,
+        text-decoration-color 150ms $transition-funciton,
+        fill 150ms $transition-funciton,
+        stronke 150ms $transition-funciton
       ),
-      "1s-opacity": opacity 1s ease-in-out,
-      "slow-opacity": opacity 700ms ease-in-out,
-      "med-opacity": opacity 500ms ease-in-out,
-      "default-opacity": opacity 300ms ease-in-out,
-      "fast-opacity": opacity 150ms ease-in-out,
-      "1s-shadow": box-shadow 1s ease-in-out,
-      "slow-shadow": box-shadow 700ms ease-in-out,
-      "med-shadow": box-shadow 500ms ease-in-out,
-      "default-shadow": box-shadow 300ms ease-in-out,
-      "fast-shadow": box-shadow 150ms ease-in-out,
-      "1s-transform": transform 1s ease-in-out,
-      "slow-transform": transform 700ms ease-in-out,
-      "med-transform": transform 500ms ease-in-out,
-      "default-transform": transform 300ms ease-in-out,
-      "fast-transform": transform 150ms ease-in-out
+      "1s-opacity": opacity 1s $transition-funciton,
+      "slow-opacity": opacity 700ms $transition-funciton,
+      "med-opacity": opacity 500ms $transition-funciton,
+      "default-opacity": opacity 300ms $transition-funciton,
+      "fast-opacity": opacity 150ms $transition-funciton,
+      "1s-shadow": box-shadow 1s $transition-funciton,
+      "slow-shadow": box-shadow 700ms $transition-funciton,
+      "med-shadow": box-shadow 500ms $transition-funciton,
+      "default-shadow": box-shadow 300ms $transition-funciton,
+      "fast-shadow": box-shadow 150ms $transition-funciton,
+      "1s-transform": transform 1s $transition-funciton,
+      "slow-transform": transform 700ms $transition-funciton,
+      "med-transform": transform 500ms $transition-funciton,
+      "default-transform": transform 300ms $transition-funciton,
+      "fast-transform": transform 150ms $transition-funciton
     )
   )
 );
