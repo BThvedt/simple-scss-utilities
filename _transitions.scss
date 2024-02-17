@@ -1,0 +1,127 @@
+// $transition: (
+//   "prefix": "transition",
+//   "values": (
+//     "1s": all 1s $transition-funciton,
+//     "slow": all 700ms $transition-funciton,
+//     "med": all 500ms $transition-funciton,
+//     "default": all 300ms $transition-funciton,
+//     "fast": all 150ms $transition-funciton,
+//     "1s-colors": (
+//       color 1s $transition-funciton,
+//       background-color 1s $transition-funciton,
+//       border-color 1s $transition-funciton,
+//       text-decoration-color 1s $transition-funciton,
+//       fill 1s $transition-funciton,
+//       stronke 1s $transition-funciton
+//     ),
+//     "slow-colors": (
+//       color 700ms $transition-funciton,
+//       background-color 700ms $transition-funciton,
+//       border-color 700ms $transition-funciton,
+//       text-decoration-color 700ms $transition-funciton,
+//       fill 700ms $transition-funciton,
+//       stronke 700ms $transition-funciton
+//     ),
+//     "med-colors": (
+//       color 500ms $transition-funciton,
+//       background-color 500ms $transition-funciton,
+//       border-color 500ms $transition-funciton,
+//       text-decoration-color 500ms $transition-funciton,
+//       fill 500ms $transition-funciton,
+//       stronke 500ms $transition-funciton
+//     ),
+//     "default-colors": (
+//       color 300ms $transition-funciton,
+//       background-color 300ms $transition-funciton,
+//       border-color 300ms $transition-funciton,
+//       text-decoration-color 300ms $transition-funciton,
+//       fill 300ms $transition-funciton,
+//       stronke 300ms $transition-funciton
+//     ),
+//     "fast-colors": (
+//       color 150ms $transition-funciton,
+//       background-color 150ms $transition-funciton,
+//       border-color 150ms $transition-funciton,
+//       text-decoration-color 150ms $transition-funciton,
+//       fill 150ms $transition-funciton,
+//       stronke 150ms $transition-funciton
+//     ),
+//     "1s-opacity": opacity 1s $transition-funciton,
+//     "slow-opacity": opacity 700ms $transition-funciton,
+//     "med-opacity": opacity 500ms $transition-funciton,
+//     "default-opacity": opacity 300ms $transition-funciton,
+//     "fast-opacity": opacity 150ms $transition-funciton,
+//     "1s-shadow": box-shadow 1s $transition-funciton,
+//     "slow-shadow": box-shadow 700ms $transition-funciton,
+//     "med-shadow": box-shadow 500ms $transition-funciton,
+//     "default-shadow": box-shadow 300ms $transition-funciton,
+//     "fast-shadow": box-shadow 150ms $transition-funciton,
+//     "1s-transform": transform 1s $transition-funciton,
+//     "slow-transform": transform 700ms $transition-funciton,
+//     "med-transform": transform 500ms $transition-funciton,
+//     "default-transform": transform 300ms $transition-funciton,
+//     "fast-transform": transform 150ms $transition-funciton
+//   )
+// );
+$transition-function: ease-in-out;
+$transition-speeds: (
+  "1s": 1s,
+  "slow": 700ms,
+  "med": 500ms,
+  "default": 300ms,
+  "fast": 150ms
+);
+
+@function get-transition-colors($timing) {
+  @return (
+    color $timing $transition-function,
+    background-color $timing $transition-function,
+    border-color $timing $transition-function,
+    text-decoration-color $timing $transition-function,
+    fill $timing $transition-function,
+    stroke $timing $transition-function
+  );
+}
+
+@function get-transitions($timing) {
+  @return (
+    "all": all $timing $transition-function,
+    "colors": get-transition-colors($timing),
+    "opacity": opacity $timing $transition-function,
+    "shadow": box-shadow $timing $transition-function,
+    "transform": transform $timing $transition-function
+  );
+}
+
+$transition-map: ();
+@each $speedKey, $timing in $transition-speeds {
+  // make a transition class name with vlue
+  $transitions: get-transitions($timing);
+
+  $speed-map: ();
+  @each $transitionKey, $transitionVal in $transitions {
+    $speed-map-key: "";
+    @if ($transitionKey == "all") {
+      $speed-map-key: "transition-" + $speedKey;
+    } @else {
+      $speed-map-key: "transition-" + $transitionKey + "-" + $speedKey;
+    }
+
+    $speed-map: map-merge(
+      $speed-map,
+      (
+        $speed-map-key: $transitionVal
+      )
+    );
+  }
+
+  $transition-map: map-merge($transition-map, $speed-map);
+}
+
+// @debug $transition-map;
+
+@each $k, $v in $transition-map {
+  .#{$k} {
+    transition: $v;
+  }
+}

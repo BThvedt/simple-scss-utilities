@@ -288,4 +288,12 @@ $box-shadows: (
 );
 
 $pseudo-classes: "hover", "active", "focus"; // can be edited
+
 $transition-funciton: ease-in-out;
+$tansition-speeds: (
+  "1s": 1s,
+  "slow": 700ms,
+  "med": 500ms,
+  "default": 300ms,
+  "fast": 150ms
+);
