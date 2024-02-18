@@ -151,7 +151,7 @@ $line-heights: (
   "0": 0,
   "sm": 1rem,
   "md": 1.2rem,
-  "lg": 1.3r5em,
+  "lg": 1.35rem,
   "xl": 1.5rem,
   "2xl": 2rem
 );
@@ -289,8 +289,8 @@ $box-shadows: (
 
 $pseudo-classes: "hover", "active", "focus"; // can be edited
 
-$transition-funciton: ease-in-out;
-$tansition-speeds: (
+$transition-function: ease-in-out;
+$transition-speeds: (
   "1s": 1s,
   "slow": 700ms,
   "med": 500ms,
