@@ -395,7 +395,7 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
 // this is much simpler without color haha
 $additional-element-states-map: (
   "font-size": (
-    "prefix": "font",
+    "prefix": "text",
     "values": map-size-vals()
   ),
   "font-family": (
