@@ -110,6 +110,8 @@ $size-multipliers: (
 
 // font sizes might be a little more different than margin or padding sizes
 // so this seperate array reflects that. I think the jump from xl to 2xl should be a bit
+// smaller. As they get bigger, it becomes less important
+
 $font-size-multipliers: (
   "0": 0,
   "xs": 3,

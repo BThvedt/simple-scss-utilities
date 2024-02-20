@@ -578,6 +578,16 @@ $mx-and-my: ("mx", "my", "px", "py");
             padding-top: $val;
             padding-bottom: $val;
           }
+        } @else if ($property == "bx") {
+          .#{$class-string} {
+            border-left-width: $val;
+            border-right-width: $val;
+          }
+        } @else if ($property == "by") {
+          .#{$class-string} {
+            border-top-width: $val;
+            border-bottom-width: $val;
+          }
         }
       }
     } @else {
