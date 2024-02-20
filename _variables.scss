@@ -142,6 +142,7 @@ $border-radiuses: (
 // also used for text decoration thickness
 $base-border-width: 1px;
 $border-and-outline-widths: (
+  "0": 0px,
   "sm": 1px,
   "md": 3px,
   "lg": 5px,

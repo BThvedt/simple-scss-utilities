@@ -434,6 +434,14 @@ $additional-element-states-map: (
     "prefix": "border",
     "values": $border-and-outline-widths
   ),
+  "bx": (
+    "prefix": "",
+    "values": $border-and-outline-widths
+  ),
+  "by": (
+    "prefix": "",
+    "values": $border-and-outline-widths
+  ),
   "border-top-width": (
     "prefix": "bt",
     "values": $border-and-outline-widths
@@ -470,18 +478,60 @@ $additional-element-states-map: (
   )
 );
 
+// add bx and by to these classes
+$x-and-y-list: ("mx", "my", "px", "py", "bx", "by");
+
 @each $property, $map in $additional-element-states-map {
   $prefix: map-get($map, "prefix");
   $values: map-get($map, "values");
 
-  @each $pseudo-class in $pseudo-classes {
-    // make pseudo-class like hover:font-size-xl and focus:text-decoration-underline and stuff like that
-    @each $valueKey, $val in $values {
-      $class-string: #{$pseudo-class} + "\\:"+ #{$prefix} + "-" + #{$valueKey};
+  @if index($x-and-y-list, $property) {
+    @each $pseudo-class in $pseudo-classes {
+      // make pseudo-class like hover:font-size-xl and focus:text-decoration-underline and stuff like that
+      @each $valueKey, $val in $values {
+        $class-string: #{$pseudo-class} +
+          "\\:"+
+          #{$property} +
+          "-" +
+          #{$valueKey};
 
-      .#{$class-string} {
-        &:#{$pseudo-class} {
-          #{$property}: $val;
+        @if ($property == "bx") {
+          .#{$class-string} {
+            &:#{$pseudo-class} {
+              border-left-width: $val;
+              border-right-width: $val;
+            }
+          }
+        } @else if ($property == "by") {
+          .#{$class-string} {
+            &:#{$pseudo-class} {
+              border-top-width: $val;
+              border-bottom-width: $val;
+            }
+          }
+        }
+
+        // .#{$class-string} {
+        //   &:#{$pseudo-class} {
+        //     #{$property}: $val;
+        //   }
+        // }
+      }
+    }
+  } @else {
+    @each $pseudo-class in $pseudo-classes {
+      // make pseudo-class like hover:font-size-xl and focus:text-decoration-underline and stuff like that
+      @each $valueKey, $val in $values {
+        $class-string: #{$pseudo-class} +
+          "\\:"+
+          #{$prefix} +
+          "-" +
+          #{$valueKey};
+
+        .#{$class-string} {
+          &:#{$pseudo-class} {
+            #{$property}: $val;
+          }
         }
       }
     }

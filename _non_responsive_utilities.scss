@@ -134,22 +134,7 @@ $non-responsive-utilities: (
     "prefix": "border",
     "values": $border-styles
   ),
-  "border-top-style": (
-    "prefix": "bt",
-    "values": $border-styles
-  ),
-  "border-left-style": (
-    "prefix": "bl",
-    "values": $border-styles
-  ),
-  "border-bottom-style": (
-    "prefix": "bb",
-    "values": $border-styles
-  ),
-  "border-right-style": (
-    "prefix": "br",
-    "values": $border-styles
-  ),
+
   "z-index": (
     "prefix": "z",
     "values": z-index-map()
