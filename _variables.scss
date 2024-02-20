@@ -102,14 +102,14 @@ $size-multipliers: (
   "base": 8,
   "lg": 10,
   "xl": 12,
-  "2xl": 14,
+  "2xl": 16,
   "3xl": 24,
   "4xl": 32,
   "5xl": 40
 );
 
 // font sizes might be a little more different than margin or padding sizes
-// so this seperate array reflects that
+// so this seperate array reflects that. I think the jump from xl to 2xl should be a bit
 $font-size-multipliers: (
   "0": 0,
   "xs": 3,
@@ -118,7 +118,7 @@ $font-size-multipliers: (
   "base": 8,
   "lg": 10,
   "xl": 12,
-  "2xl": 16,
+  "2xl": 14,
   "3xl": 24,
   "4xl": 32,
   "5xl": 40
