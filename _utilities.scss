@@ -230,6 +230,16 @@ $utilities: (
     "prefix": "border",
     "values": $border-and-outline-widths
   ),
+
+  "bx": (
+    "prefix": "",
+    "values": $border-and-outline-widths
+  ),
+  "by": (
+    "prefix": "",
+    "values": $border-and-outline-widths
+  ),
+
   "border-top-width": (
     "prefix": "bt",
     "values": $border-and-outline-widths
@@ -541,7 +551,7 @@ $utilities: (
 
 // would be nice to have mx and my classes but gotta handle em differnety
 // this helps in the following function
-$mx-and-my: ("mx", "my", "px", "py");
+$x-and-y-list: ("mx", "my", "px", "py", "bx", "by");
 
 // a mixin that essentially generates a ton of classes
 @mixin generate-classes($breakpointKey, $breakpoint-prefix) {
@@ -553,7 +563,7 @@ $mx-and-my: ("mx", "my", "px", "py");
     $prefix: map-get($map, "prefix");
     $values: map-get($map, "values");
 
-    @if index($mx-and-my, $property) {
+    @if index($x-and-y-list, $property) {
       // in these special cases, the 'prefix' is margin or padding
 
       @each $valueKey, $val in $values {
