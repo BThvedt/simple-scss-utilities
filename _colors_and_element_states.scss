@@ -416,7 +416,16 @@ $additional-element-states-map: (
         underline,
         overline
       ),
-      "line-through": line-through,
+      "line-through": line-through
+    )
+  ),
+  "text-decoration-style": (
+    "prefix": "decoration",
+    "values": (
+      "solid": solid,
+      "double": double,
+      "dotted": dotted,
+      "dashed": dashed,
       "wavy": wavy
     )
   ),
