@@ -86,10 +86,7 @@ $non-responsive-utilities: (
       "none": none,
       "underline": underline,
       "overline": overline,
-      "underover": (
-        underline,
-        overline
-      ),
+      "underover": underline overline,
       "line-through": line-through
     )
   ),
