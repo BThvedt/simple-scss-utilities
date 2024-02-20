@@ -80,6 +80,29 @@ $non-responsive-utilities: (
       "oblique": oblique
     )
   ),
+  "text-decoration": (
+    "prefix": "text",
+    "values": (
+      "none": none,
+      "underline": underline,
+      "overline": overline,
+      "underover": (
+        underline,
+        overline
+      ),
+      "line-through": line-through
+    )
+  ),
+  "text-decoration-style": (
+    "prefix": "decoration",
+    "values": (
+      "solid": solid,
+      "double": double,
+      "dotted": dotted,
+      "dashed": dashed,
+      "wavy": wavy
+    )
+  ),
   "text-decoration-thickness": (
     "prefix": "decoration",
     "values": $border-and-outline-widths
