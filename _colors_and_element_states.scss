@@ -269,121 +269,181 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
 
 // @debug $final-map;
 
-@each $mode, $mode-map in $final-map {
-  @if ($mode== "default") {
-    @each $category, $category-map in $mode-map {
-      @each $class-name, $val in $category-map {
-        // there's a better way to have done this, but at this point
-        // I'm not gonna go back and write the above loops again
+@mixin finallyMakeClasses($mode-map) {
+  @each $category, $category-map in $mode-map {
+    @each $class-name, $val in $category-map {
+      // there's a better way to have done this, but at this point
+      // I'm not gonna go back and write the above loops again
 
-        @if ($category == $class-prefix-text) {
-          @include generate-final-rule($class-name, color, $val);
-        }
-        @if ($category == $class-prefix-background) {
-          @include generate-final-rule($class-name, background-color, $val);
-        }
-        @if ($category == $class-prefix-border) {
-          @include generate-final-rule($class-name, border-color, $val);
-        }
-        @if ($category == $class-prefix-outline) {
-          @include generate-final-rule($class-name, outline-color, $val);
-        }
-        @if ($category == $class-prefix-text-decoration) {
-          @include generate-final-rule(
-            $class-name,
-            text-decoration-color,
-            $val
-          );
-        }
-        @if ($category == $class-prefix-selection-color) {
-          @if (type-of($class-name) != "map") {
-            .#{$class-name}::selection {
+      @if ($category == $class-prefix-text) {
+        @include generate-final-rule($class-name, color, $val);
+      }
+      @if ($category == $class-prefix-background) {
+        @include generate-final-rule($class-name, background-color, $val);
+      }
+      @if ($category == $class-prefix-border) {
+        @include generate-final-rule($class-name, border-color, $val);
+      }
+      @if ($category == $class-prefix-outline) {
+        @include generate-final-rule($class-name, outline-color, $val);
+      }
+      @if ($category == $class-prefix-text-decoration) {
+        @include generate-final-rule($class-name, text-decoration-color, $val);
+      }
+      @if ($category == $class-prefix-selection-color) {
+        @if (type-of($class-name) != "map") {
+          .#{$class-name}::selection {
+            color: $val;
+          }
+        } @else {
+          $pseudo-class-name: map-get($class-name, "class-name");
+          $pseudo-class: map-get($class-name, "pseudo-class");
+          .#{$pseudo-class-name} {
+            &:#{$pseudo-class}::selection {
               color: $val;
             }
-          } @else {
-            $pseudo-class-name: map-get($class-name, "class-name");
-            $pseudo-class: map-get($class-name, "pseudo-class");
-            .#{$pseudo-class-name} {
-              &:#{$pseudo-class}::selection {
-                color: $val;
-              }
-            }
           }
         }
-        @if ($category == $class-prefix-selection-background) {
-          @if (type-of($class-name) != "map") {
-            .#{$class-name}::selection {
+      }
+      @if ($category == $class-prefix-selection-background) {
+        @if (type-of($class-name) != "map") {
+          .#{$class-name}::selection {
+            background-color: $val;
+          }
+        } @else {
+          $pseudo-class-name: map-get($class-name, "class-name");
+          $pseudo-class: map-get($class-name, "pseudo-class");
+          .#{$pseudo-class-name} {
+            &:#{$pseudo-class}::selection {
               background-color: $val;
             }
-          } @else {
-            $pseudo-class-name: map-get($class-name, "class-name");
-            $pseudo-class: map-get($class-name, "pseudo-class");
-            .#{$pseudo-class-name} {
-              &:#{$pseudo-class}::selection {
-                background-color: $val;
-              }
-            }
           }
         }
-
-        // $class-prefix-text-decoration
       }
+
+      // $class-prefix-text-decoration
     }
+  }
+}
+
+@each $mode, $mode-map in $final-map {
+  @if ($mode== "default") {
+    // @each $category, $category-map in $mode-map {
+    //   @each $class-name, $val in $category-map {
+    //     // there's a better way to have done this, but at this point
+    //     // I'm not gonna go back and write the above loops again
+
+    //     @if ($category == $class-prefix-text) {
+    //       @include generate-final-rule($class-name, color, $val);
+    //     }
+    //     @if ($category == $class-prefix-background) {
+    //       @include generate-final-rule($class-name, background-color, $val);
+    //     }
+    //     @if ($category == $class-prefix-border) {
+    //       @include generate-final-rule($class-name, border-color, $val);
+    //     }
+    //     @if ($category == $class-prefix-outline) {
+    //       @include generate-final-rule($class-name, outline-color, $val);
+    //     }
+    //     @if ($category == $class-prefix-text-decoration) {
+    //       @include generate-final-rule(
+    //         $class-name,
+    //         text-decoration-color,
+    //         $val
+    //       );
+    //     }
+    //     @if ($category == $class-prefix-selection-color) {
+    //       @if (type-of($class-name) != "map") {
+    //         .#{$class-name}::selection {
+    //           color: $val;
+    //         }
+    //       } @else {
+    //         $pseudo-class-name: map-get($class-name, "class-name");
+    //         $pseudo-class: map-get($class-name, "pseudo-class");
+    //         .#{$pseudo-class-name} {
+    //           &:#{$pseudo-class}::selection {
+    //             color: $val;
+    //           }
+    //         }
+    //       }
+    //     }
+    //     @if ($category == $class-prefix-selection-background) {
+    //       @if (type-of($class-name) != "map") {
+    //         .#{$class-name}::selection {
+    //           background-color: $val;
+    //         }
+    //       } @else {
+    //         $pseudo-class-name: map-get($class-name, "class-name");
+    //         $pseudo-class: map-get($class-name, "pseudo-class");
+    //         .#{$pseudo-class-name} {
+    //           &:#{$pseudo-class}::selection {
+    //             background-color: $val;
+    //           }
+    //         }
+    //       }
+    //     }
+
+    //     // $class-prefix-text-decoration
+    //   }
+    // }
+    @include finallyMakeClasses($mode-map);
   } @else {
     .#{$mode} {
-      @each $category, $category-map in $mode-map {
-        @each $class-name, $val in $category-map {
-          @if ($category == $class-prefix-text) {
-            @include generate-final-rule($class-name, color, $val);
-          }
-          @if ($category == $class-prefix-background) {
-            @include generate-final-rule($class-name, background-color, $val);
-          }
-          @if ($category == $class-prefix-border) {
-            @include generate-final-rule($class-name, border-color, $val);
-          }
-          @if ($category == $class-prefix-outline) {
-            @include generate-final-rule($class-name, outline-color, $val);
-          }
-          @if ($category == $class-prefix-text-decoration) {
-            @include generate-final-rule(
-              $class-name,
-              text-decoration-color,
-              $val
-            );
-          }
-          @if ($category == $class-prefix-selection-color) {
-            @if (type-of($class-name) != "map") {
-              .#{$class-name}::selection {
-                color: $val;
-              }
-            } @else {
-              $pseudo-class-name: map-get($class-name, "class-name");
-              $pseudo-class: map-get($class-name, "pseudo-class");
-              .#{$pseudo-class-name} {
-                &:#{$pseudo-class}::selection {
-                  color: $val;
-                }
-              }
-            }
-          }
-          @if ($category == $class-prefix-selection-background) {
-            @if (type-of($class-name) != "map") {
-              .#{$class-name}::selection {
-                background-color: $val;
-              }
-            } @else {
-              $pseudo-class-name: map-get($class-name, "class-name");
-              $pseudo-class: map-get($class-name, "pseudo-class");
-              .#{$pseudo-class-name} {
-                &:#{$pseudo-class}::selection {
-                  background-color: $val;
-                }
-              }
-            }
-          }
-        }
-      }
+      @include finallyMakeClasses($mode-map)
+        // @each $category, $category-map in $mode-map {
+        //   @each $class-name, $val in $category-map {
+        //     @if ($category == $class-prefix-text) {
+        //       @include generate-final-rule($class-name, color, $val);
+        //     }
+        //     @if ($category == $class-prefix-background) {
+        //       @include generate-final-rule($class-name, background-color, $val);
+        //     }
+        //     @if ($category == $class-prefix-border) {
+        //       @include generate-final-rule($class-name, border-color, $val);
+        //     }
+        //     @if ($category == $class-prefix-outline) {
+        //       @include generate-final-rule($class-name, outline-color, $val);
+        //     }
+        //     @if ($category == $class-prefix-text-decoration) {
+        //       @include generate-final-rule(
+        //         $class-name,
+        //         text-decoration-color,
+        //         $val
+        //       );
+        //     }
+        //     @if ($category == $class-prefix-selection-color) {
+        //       @if (type-of($class-name) != "map") {
+        //         .#{$class-name}::selection {
+        //           color: $val;
+        //         }
+        //       } @else {
+        //         $pseudo-class-name: map-get($class-name, "class-name");
+        //         $pseudo-class: map-get($class-name, "pseudo-class");
+        //         .#{$pseudo-class-name} {
+        //           &:#{$pseudo-class}::selection {
+        //             color: $val;
+        //           }
+        //         }
+        //       }
+        //     }
+        //     @if ($category == $class-prefix-selection-background) {
+        //       @if (type-of($class-name) != "map") {
+        //         .#{$class-name}::selection {
+        //           background-color: $val;
+        //         }
+        //       } @else {
+        //         $pseudo-class-name: map-get($class-name, "class-name");
+        //         $pseudo-class: map-get($class-name, "pseudo-class");
+        //         .#{$pseudo-class-name} {
+        //           &:#{$pseudo-class}::selection {
+        //             background-color: $val;
+        //           }
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
+;
     }
   }
 }

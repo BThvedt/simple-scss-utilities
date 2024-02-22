@@ -43,6 +43,8 @@ $breakpoints: (
 
 // dark mode ..
 $modes: "default", "dark-mode";
+$jsForColorMode: true; // if false, the .color-mode class instead becomes a prefers-dark-mode selector
+// if true, the colors modes are controlled by javascript
 
 // lighter and darker
 // for example, the numbers are how much percent lighter or darker the color is
@@ -171,7 +173,6 @@ $letter-spacing: (
 // just helper map specifically for border styles
 // in the utilities and colors files
 $border-styles: (
-  "none": none,
   "dashed": dashed,
   "dotted": dotted,
   "solid": solid,
