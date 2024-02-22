@@ -387,7 +387,7 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
     //   }
     // }
     @include finallyMakeClasses($mode-map);
-  } @else {
+  } @else if ($jsForColorMode) {
     .#{$mode} {
       @include finallyMakeClasses($mode-map)
         // @each $category, $category-map in $mode-map {
@@ -444,6 +444,10 @@ $class-prefixes: $class-prefix-text, $class-prefix-background,
         //   }
         // }
 ;
+    }
+  } @else {
+    @media (prefers-color-scheme: dark) {
+      @include finallyMakeClasses($mode-map);
     }
   }
 }
