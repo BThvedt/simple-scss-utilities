@@ -43,7 +43,7 @@ $breakpoints: (
 
 // dark mode ..
 $modes: "default", "dark-mode";
-$jsForColorMode: false; // if false, the .color-mode class instead becomes a prefers-dark-mode selector
+$jsForColorMode: true; // if false, the .color-mode class instead becomes a prefers-dark-mode selector
 // if true, the colors modes are controlled by javascript
 
 // lighter and darker
