@@ -46,6 +46,8 @@ $modes: "default", "dark-mode";
 $jsForColorMode: true; // if false, the .color-mode class instead becomes a prefers-dark-mode selector
 // if true, the colors modes are controlled by javascript
 
+// tz=America.Chicago&autoplay=true&f5=20000&f7=100&f6=8
+
 // lighter and darker
 // for example, the numbers are how much percent lighter or darker the color is
 // I actually mix with that percentage of black and white, because I
@@ -142,13 +144,14 @@ $border-radiuses: (
 );
 
 // also used for text decoration thickness
-$base-border-width: 1px;
+// $base-border-width: 1px;
 $border-and-outline-widths: (
   "0": 0px,
   "sm": 1px,
   "md": 3px,
   "lg": 5px,
-  "xl": 7px
+  "xl": 7px,
+  "2xl": 11px
 );
 
 // couple other maps ...

@@ -73,10 +73,7 @@ $class_data: ();
   box-shadow: $params;
 }
 
-// ok continue from here..
-@each $mode in $modes {
-  $mode-class-data: map-get($class_data, $mode);
-
+@mixin finallyGenerateBoxShadows($mode, $mode-class-data) {
   @if ($mode-class-data != null) {
     @each $datum in $mode-class-data {
       // make a final class name wiht the size
@@ -102,6 +99,13 @@ $class_data: ();
             .#{$class-name}-#{$size} {
               box-shadow: #{$shadow-list};
             }
+
+            @if ($mode != "default") {
+              // also make a couple extra classes
+              .#{$mode}\\:#{$class-name}-#{$size} {
+                box-shadow: #{$shadow-list} !important;
+              }
+            }
           } @else {
             // class name is already inclusive of pseudo class
             .#{$class-name}-#{$size} {
@@ -109,9 +113,74 @@ $class_data: ();
                 box-shadow: #{$shadow-list};
               }
             }
+
+            @if ($mode != "default") {
+              // also make a couple extra classes
+              .#{$mode}\\:#{$class-name}-#{$size} {
+                &:#{$pseudo-class} {
+                  box-shadow: #{$shadow-list} !important;
+                }
+              }
+            }
           }
         }
       }
+    }
+  }
+}
+
+// ok continue from here..
+// test and then eventually add a dark-mode: class or something with !important
+@each $mode in $modes {
+  $mode-class-data: map-get($class_data, $mode);
+
+  // @if ($mode-class-data != null) {
+  //   @each $datum in $mode-class-data {
+  //     // make a final class name wiht the size
+  //     // then make the box shadow - test individual first
+  //     @each $shadowKey, $shadowMap in $box-shadows {
+  //       @if ($shadowKey != "none") {
+  //         $size: $shadowKey;
+  //         $shadow-list: ();
+  //         $class-name: map-get($datum, "class-name");
+  //         $pseudo-class: map-get($datum, "pseudo-class");
+  //         $color: map-get($datum, "color");
+
+  //         @each $box-shadow-map in $shadowMap {
+  //           $shadowPixels: map-get($box-shadow-map, "shadow");
+  //           $shadowOpacity: map-get($box-shadow-map, "opacity");
+
+  //           $finalShadow: #{$shadowPixels} rgba($color, $shadowOpacity);
+
+  //           $shadow-list: append($shadow-list, $finalShadow, comma);
+  //         }
+
+  //         @if ($pseudo-class == "none") {
+  //           .#{$class-name}-#{$size} {
+  //             box-shadow: #{$shadow-list};
+  //           }
+  //         } @else {
+  //           // class name is already inclusive of pseudo class
+  //           .#{$class-name}-#{$size} {
+  //             &:#{$pseudo-class} {
+  //               box-shadow: #{$shadow-list};
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  @if ($mode == "default") {
+    @include finallyGenerateBoxShadows($mode, $mode-class-data);
+  } @else if ($mode, $jsForColorMode) {
+    .#{$mode} {
+      @include finallyGenerateBoxShadows($mode, $mode-class-data);
+    }
+  } @else {
+    @media (prefers-color-scheme: dark) {
+      @include finallyGenerateBoxShadows($mode, $mode-class-data);
     }
   }
 }
