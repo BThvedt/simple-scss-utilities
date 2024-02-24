@@ -226,6 +226,23 @@ $utilities: (
     "prefix": "radius",
     "values": $border-radiuses
   ),
+  "border-top-left-radius": (
+    "prefix": "rtl",
+    "values": $border-radiuses
+  ),
+  "border-top-right-radius": (
+    "prefix": "rtr",
+    "values": $border-radiuses
+  ),
+  "border-bottom-left-radius": (
+    "prefix": "rbl",
+    "values": $border-radiuses
+  ),
+  "border-bottom-right-radius": (
+    "prefix": "rbr",
+    "values": $border-radiuses
+  ),
+
   "border-width": (
     "prefix": "border",
     "values": $border-and-outline-widths
