@@ -109,7 +109,7 @@
       $property ==
       "max-height"
   ) {
-    $return-map: map-merge($return-map, $screen_widths);
+    $return-map: map-merge($return-map, $screen_heights);
   } @else if
     (
       $property ==
@@ -120,7 +120,7 @@
         "max-width"
     )
   {
-    $return-map: map-merge($return-map, $screen_heights);
+    $return-map: map-merge($return-map, $screen_widths);
   }
 
   @return $return-map;
