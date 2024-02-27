@@ -350,6 +350,11 @@ $utilities: (
   "justify-items": (
     "prefix": "justify-items",
     "values": (
+      "normal": normal,
+      "legacy": legacy,
+      "initial": initial,
+      "left": left,
+      "right": right,
       "start": start,
       "end": end,
       "center": center,
@@ -359,7 +364,8 @@ $utilities: (
   "justify-content": (
     "prefix": "justify",
     "values": (
-      "normal": normal,
+      "initial": initial,
+      "inherit": inherit,
       "start": flex-start,
       "end": flex-end,
       "center": center,
@@ -372,17 +378,23 @@ $utilities: (
   "align-items": (
     "prefix": "items",
     "values": (
+      "normal": normal,
+      "grid-start": start,
+      "grid-end": end,
       "center": center,
       "start": flex-start,
       "end": flex-end,
       "stretch": stretch,
-      "baseline": baseline
+      "baseline": baseline,
+      "initial": initial,
+      "inherit": inherit
     )
   ),
   "align-content": (
     "prefix": "align-content",
     "values": (
-      "normal": normal,
+      "initial": initial,
+      "inherit": inherit,
       "start": flex-start,
       "end": flex-end,
       "center": center,
@@ -408,9 +420,14 @@ $utilities: (
     "prefix": "justify-self",
     "values": (
       "auto": auto,
-      "start": flex-start,
-      "end": flex-end,
+      "normal": normal,
+      "start": start,
+      "left": left,
       "center": center,
+      "end": end,
+      "right": right,
+      "initial": initial,
+      "inherit": inherit,
       "stretch": stretch
     )
   ),
