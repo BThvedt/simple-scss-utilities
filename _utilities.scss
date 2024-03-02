@@ -511,6 +511,16 @@ $utilities: (
       "outside": outside,
       "inside": inside
     )
+  ),
+  "object-fit": (
+    "prefix": "object",
+    "values": (
+      "contain": contain,
+      "cover": cover,
+      "fill": fill,
+      "none": none,
+      "scale-down": scale-down
+    )
   )
 );
 
