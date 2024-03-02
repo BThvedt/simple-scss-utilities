@@ -266,9 +266,9 @@ $px-for-nudging-position: (
 
 $aspect-ratios: (
   "auto": auto,
-  "1\\/1": 1 / 1,
-  "4\\/3": 4 / 3,
-  "16\\/9": 16 / 9
+  "1\\/1": math.div(1, 1),
+  "4\\/3": math.div(4, 3),
+  "16\\/9": math.div(16, 9)
 );
 
 // hmm

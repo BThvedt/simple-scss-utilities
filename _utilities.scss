@@ -521,6 +521,11 @@ $utilities: (
       "none": none,
       "scale-down": scale-down
     )
+  ),
+
+  "aspect-ratio": (
+    "prefix": "ratio",
+    "values": $aspect-ratios
   )
 );
 
