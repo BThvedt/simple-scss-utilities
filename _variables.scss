@@ -264,6 +264,13 @@ $px-for-nudging-position: (
   "3px": 3px
 );
 
+$aspect-ratios: (
+  "auto": auto,
+  "1\\/1": 1 / 1,
+  "4\\/3": 4 / 3,
+  "16\\/9": 16 / 9
+);
+
 // hmm
 $box-shadows: (
   "sm": (
