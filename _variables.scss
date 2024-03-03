@@ -325,3 +325,26 @@ $transition-speeds: (
   "default": 300ms,
   "fast": 150ms
 );
+
+$filter-maps: (
+  "blur": (
+    "sm": blur(2px),
+    "md": blur(4px),
+    "lg": blur(6px)
+  ),
+  "contrast": (
+    "sm": contrast(0.75),
+    "md": contrast(1.25),
+    "lg": contrast(1.75)
+  ),
+  "greyscale": (
+    "sm": greyscale(0.33),
+    "md": greyscale(0.67),
+    "lg": greyscale(1)
+  ),
+  "saturate": (
+    "sm": saturate(0.5),
+    "md": saturate(2),
+    "lg": saturate(3)
+  )
+);
