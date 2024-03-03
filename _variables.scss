@@ -337,10 +337,10 @@ $filter-maps: (
     "md": contrast(1.25),
     "lg": contrast(1.75)
   ),
-  "greyscale": (
-    "sm": greyscale(0.33),
-    "md": greyscale(0.67),
-    "lg": greyscale(1)
+  "grayscale": (
+    "sm": grayscale(0.33),
+    "md": grayscale(0.67),
+    "lg": grayscale(1)
   ),
   "saturate": (
     "sm": saturate(0.5),
